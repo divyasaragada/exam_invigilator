@@ -1,0 +1,49 @@
+{% load static %}
+.nav-item{
+	
+	padding: 0 28px;
+
+}
+.nav-item:hover{
+	display: block;
+	color:#68b0ab;
+	}
+.nav-link{
+	font-size: 1.3rem;
+	color: #ffeeec!important;
+	font-family: "Montserrat-Light";
+}
+body{
+
+	font-family: 'Roboto', sans-serif;
+	background:url('/static/images/first.jpeg') ;
+	background-repeat: no-repeat;
+  background-attachment: ;  
+  background-size: cover;
+	background-color: #ffbb91;
+
+}
+h2{
+	white-space: pre;
+	width: 44%;
+	color: #30475e;
+	line-height: 2;
+	font-family: 'Merriweather', serif;
+	font-weight: bold;
+	margin: 170px auto 40px auto;
+}
+.nav-link:hover{
+	color: #f8bd7f;
+ text-decoration: underline;
+	
+}
+.container-fluid{
+	background-color: #00416d;
+	height: 1.4%;
+	padding:0 0;
+}
+img{
+	width:4%;
+	height: 4%;
+
+}
