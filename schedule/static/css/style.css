@@ -1,4 +1,5 @@
 {% load static %}
+
 .nav-item{
 	
 	padding: 0 28px;
@@ -23,14 +24,26 @@ body{
 	background-color: #ffbb91;
 
 }
-h2{
-	white-space: pre;
-	width: 44%;
+.class1{
+
 	color: #30475e;
 	line-height: 2;
 	font-family: 'Merriweather', serif;
 	font-weight: bold;
 	margin: 170px auto 40px auto;
+   
+   animation: mine 3s steps(40);
+   overflow: hidden;
+   white-space: nowrap;
+  
+}
+@keyframes mine {
+	0%{
+		width: 0ch;
+	}
+	100%{
+		width: 40ch;
+	}
 }
 .nav-link:hover{
 	color: #f8bd7f;

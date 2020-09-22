@@ -21,7 +21,9 @@ class room(models.Model):
 class exam(models.Model):
 	semesters = (("1-1","1-1"),("1-2","1-2"),("2-1","2-1"),("2-2","2-2"),("2-1","2-1"),("2-2","2-2"),("3-1","3-1"),("4-2","4-2"))
 	faculty_name=models.CharField(max_length=50,null=False)
-	faculty_id=models.ForeignKey(faculty, on_delete=models.CASCADE)
+	faculty_name=models.CharField(max_length=50,null=False)
+
+	#faculty_id=models.ForeignKey(faculty, on_delete=models.CASCADE)---will do it while dispalying final timetable
 	exam_date=models.DateField(null=False)
 	exam_time=models.CharField(max_length=50,null=False)
 	roomno=models.ForeignKey(room, on_delete=models.CASCADE)
@@ -38,6 +40,11 @@ class student(models.Model):
 	stu_dept=models.CharField(max_length=3,choices=depts)
 	year=models.IntegerField(choices=x)
 
+class adminlogin(models.Model):
+	username=models.CharField(max_length=50,null=False)
+	password=models.CharField(max_length=50,null=False)
+class number(models.Model):
+	noofexams=models.IntegerField()
 
 
 
