@@ -1,14 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title>faculty login page</title>
-	<link rel="stylesheet" type="text/css" href="style2.css">
+	<link rel="stylesheet" type="text/css" href="{% static   'css/style5.css' %}">
 </head>
 <body>
 	<div class="loginbox">
-	<img src="faculty1.png" class="faculty1">
+	<img src="/static/images/faculty1.png" class="faculty1">
 	<h1>LOGIN HERE</h1>
-	<form action="*/action_page.html">
+	<form action="{% url 'fac' %}" method="POST">
+		{% csrf_token %}
 			<div>
 				<label>ID</label>
 				<input type="varchar" name="id" placeholder="Enter ID">

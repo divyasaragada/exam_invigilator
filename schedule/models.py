@@ -45,6 +45,9 @@ class adminlogin(models.Model):
 	password=models.CharField(max_length=50,null=False)
 class number(models.Model):
 	noofexams=models.IntegerField()
+class constraints(models.Model):
+	cname=models.CharField(max_length=50,null=False);
+	cdate=models.DateField(null=False);
 
 
 

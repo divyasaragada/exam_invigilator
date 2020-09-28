@@ -1,14 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
-<head>
+<head>    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
     <title>admin login page</title>
-    <link rel="stylesheet" type="text/css" href="style4.css">
+    <link rel="stylesheet" type="text/css" href="{% static   'css/style4.css' %}">
 </head>
     <body>
+      {% include 'schedule/messages.html' %}
     <div class="loginbox">
-    <img src="admin2.png" class="admin">    
+    <img src="/static/images/admin2.png" class="admin">    
         <h1>LOGIN HERE</h1>
-        <form action="*/action_page.html">
+        <form action="{% url 'admin1' %}" method="POST">
+            {% csrf_token %}
            <div class="formbox">
                 <label>USERNAME</label>
                 <input type="text" name="uname" placeholder="Enter Username">
@@ -18,7 +23,9 @@
                 <input type="password" name="password" placeholder="Enter Password">
             </div>
             <input type="submit" name="submit" placeholder="LOGIN">
+            <center>
             <a href="a">Forget Password</a>
+            </center>
         </form>
     </div>
     </body>
