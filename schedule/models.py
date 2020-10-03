@@ -7,7 +7,7 @@ class faculty(models.Model):
 	depts=(('it','information technology'),('eee','electrical'),('cse','computer science'),('ece',"electronics and communication"))
 	faculty_name=models.CharField(max_length=50,null=False)
 	faculty_id=models.IntegerField(primary_key=True)
-	faculty_status=models.CharField(max_length=1,choices=options)
+	faculty_status=models.CharField(max_length=1,choices=options,default='y')
 	email=models.EmailField()
 	dept=models.CharField(max_length=3,choices=depts)
 
@@ -15,7 +15,7 @@ class room(models.Model):
 	options=(('y',"yes"),('n','no'))
 	roomno=models.IntegerField(primary_key=True)
 	roomcapacity=models.IntegerField()
-	room_status=models.CharField(max_length=1,choices=options)
+	room_status=models.CharField(max_length=1,choices=options,default='y')
 
 
 class exam(models.Model):
@@ -46,8 +46,12 @@ class adminlogin(models.Model):
 class number(models.Model):
 	noofexams=models.IntegerField()
 class constraints(models.Model):
-	cname=models.CharField(max_length=50,null=False);
-	cdate=models.DateField(null=False);
+	cname=models.CharField(max_length=50,null=False)
+	cdate=models.DateField(null=False)
+class tt(models.Model):
+	cse=models.ImageField()
+	
+
 
 
 
