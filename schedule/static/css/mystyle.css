@@ -1,5 +1,5 @@
 body{
-	font-family: 'Roboto', sans-serif;
+	font-family: Comic Sans MS;
 }
 *{
 	margin: 0;
@@ -18,10 +18,17 @@ body{
 	color: #FC0527;
 }
 .menubar ul li{
+<<<<<<< HEAD
 	width: 250px;
 	margin: 7px;
 	padding: 7px;
 	font-size: 28px;
+=======
+	width: 200px;
+	margin: 1px;
+	padding: 1px;
+	font-size: 37px;
+>>>>>>> ee8f007e84f26c0b050b2f0314a0430ca4baa4b7
 }
 .menubar ul li a:hover{
 	color: #39dc79;
@@ -39,7 +46,7 @@ body{
 	height: 100%;
 	width: 100%;
 	line-height: 65px;
-	font-size: 20px;
+	font-size: 22px;
 	color: white;
 	padding-left: 40px;
 	box-sizing: border-box;
@@ -65,7 +72,7 @@ label #btn,label #cancel{
 }
 label #btn{
 	left: 40px;
-	top: 25px;
+	top: 12px;
 	font-size: 35px;
 	color: white;
 	padding: 6px 12px;
