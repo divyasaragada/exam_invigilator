@@ -5,8 +5,8 @@ from django.db.models import Model
 class faculty(models.Model):
 	options=(('y',"yes"),('n','no'))
 	depts=(('it','information technology'),('eee','electrical'),('cse','computer science'),('ece',"electronics and communication"))
-	faculty_name=models.CharField(max_length=50,null=False)
-	faculty_id=models.IntegerField(primary_key=True)
+	fname=models.CharField(primary_key=True,max_length=50,null=False,default='none')
+	faculty_id=models.IntegerField()
 	faculty_status=models.CharField(max_length=1,choices=options,default='y')
 	email=models.EmailField()
 	dept=models.CharField(max_length=3,choices=depts)
@@ -17,18 +17,26 @@ class room(models.Model):
 	roomcapacity=models.IntegerField()
 	room_status=models.CharField(max_length=1,choices=options,default='y')
 
-
 class exam(models.Model):
-	semesters = (("1-1","1-1"),("1-2","1-2"),("2-1","2-1"),("2-2","2-2"),("2-1","2-1"),("2-2","2-2"),("3-1","3-1"),("4-2","4-2"))
-	faculty_name=models.CharField(max_length=50,null=False)
-	faculty_name=models.CharField(max_length=50,null=False)
-
-	#faculty_id=models.ForeignKey(faculty, on_delete=models.CASCADE)---will do it while dispalying final timetable
+	id=models.IntegerField(primary_key=True)
 	exam_date=models.DateField(null=False)
 	exam_time=models.CharField(max_length=50,null=False)
-	roomno=models.ForeignKey(room, on_delete=models.CASCADE)
-	exam_type=models.CharField(max_length=50,null=False)
-	semester=models.CharField(max_length=10,choices=semesters)	
+
+class conduct(models.Model):
+	semesters = (("1-1","1-1"),("1-2","1-2"),("2-1","2-1"),("2-2","2-2"),("2-1","2-1"),("2-2","2-2"),("3-1","3-1"),("4-2","4-2"))
+	depts=(('it','information technology'),('eee','electrical'),('cse','computer science'),('ece',"electronics and communication"))
+
+	#faculty_id=models.ForeignKey(faculty, on_delete=models.CASCADE)---will do it while dispalying final timetable
+	#fna1=models.CharField(max_length=100,null=False)
+	fna1=models.ForeignKey(faculty,on_delete=models.CASCADE)
+	ex=models.ForeignKey(exam,on_delete=models.CASCADE)
+	room=models.ForeignKey(room, on_delete=models.CASCADE)
+
+	
+	semester=models.CharField(max_length=10,choices=semesters)
+	dept=models.CharField(max_length=3,choices=depts)	
+	subject=models.CharField(max_length=50,default='none',null=False)
+	
 
 
 class student(models.Model):

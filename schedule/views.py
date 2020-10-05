@@ -16,8 +16,8 @@ def admin1(request):
 		try:
 			data=adminlogin.objects.get(username=uname,password=passwd)
 			if data:
-				messages.success(request,"logged in successfully!!..")
-				return render(request,'schedule/admin.html')
+				
+				return render(request,'schedule/adminpage.html')
 		except Exception:
 			#return HttpResponse("please enter correct details...!!!")
 
@@ -69,3 +69,9 @@ def stud(request):
 def timetable(req):
 	data=room.objects.filter(room_status='y')
 	return render(req,'schedule/timetable.html',{'data':data})
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def adminpage(request):
+	return render(request,'schedule/adminpage.html')

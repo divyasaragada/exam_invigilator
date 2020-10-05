@@ -9,6 +9,7 @@ body{
 }
 .menubar{
 	background-color: rgb(204,255,255);
+
 	text-align: right;
 }
 .menubar ul{
@@ -20,7 +21,7 @@ body{
 	width: 250px;
 	margin: 7px;
 	padding: 7px;
-	font-size: 37px;
+	font-size: 28px;
 }
 .menubar ul li a:hover{
 	color: #39dc79;
@@ -94,7 +95,7 @@ label #cancel{
 	margin-left: 250px;
 }
 section{
-	background: url(image.png);
+	background: url('/static/images/image.png');
 	background-position: center;
 	background-size: cover;
 	height: 100vh;
