@@ -25,4 +25,6 @@ urlpatterns = [
     path('fac/',views.fac,name='fac'),
     path('stud/',views.stud,name='stud'),
     path('adminpage/',views.adminpage,name='adminpage'),
+    path('addexam/',views.addexam,name='addexam'),
+    path('assignfac/',views.assignfac,name='assignfac'),
 ]

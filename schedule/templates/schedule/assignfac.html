@@ -1,0 +1,71 @@
+{% extends 'schedule/adminpage.html' %}
+{% block content %}
+<br><br><br>
+ <div  class="row">
+  <div class="col-sm-3"></div>
+  
+  <div class="col-md-6">
+   <div class="card w-100">
+      <div class="card-header text-center text-info" >ASSIGN FACULTY HERE</div>
+     <form action="{% url 'assignfac' %}" method="POST">
+          {% csrf_token %}
+      <div class="card-body text-center">
+            <label class="inden" for="id">EXAMID :  </label>     
+      
+                      <select name="id" id="id">
+                        <option selected></option>
+           	            {% for i in x %}
+                        <option >{{ i.id }}</option>
+                        {% endfor %}
+                      </select>
+            <br>
+             <label class="inden">ROOM : </label>
+              
+                    <select name="room" id="id">
+                      <option selected></option>
+      	            {% for i in z %}
+                    <option >{{ i.roomno}}</option>
+                    {% endfor %}
+                    </select>
+           <br>
+
+          <label class="inden">FACULTY :  </label> 
+                
+                      <select name="fname" id="id">
+                         <option selected></option>
+                         {% for i in y %}
+                         <option >{{ i.fname }}</option>
+                        {% endfor %}
+                      </select>
+            <br>
+       <label class="inden">SEMESTER :  </label>
+       <input type="text" name="sem" placeholder="enter semester ('1-2') ">
+      <br>
+       <label class="inden">SUBJECT :</label>
+       <input type="text" name="sub" placeholder="enter subject ">
+       <br>
+         <label class="inden">DEPARTMENT :</label>
+
+         <select name = "dept" id ="dept">
+           <option>CSE</option>
+           <option>ECE</option>
+           <option>EEE</option>
+           <option>IT</option>
+         </select>
+         
+        
+      </select>
+   <br>
+       </div>
+    <div class="card-footer text-center" >
+      <button class="btn btn-primary">ADD</button>
+      &nbsp; &nbsp;  &nbsp;
+      <a href="{% url 'timetable' %}" <button class="btn btn-info" >PREVIEW</button></a>
+    </div>
+       
+    </form>
+    </div>
+  </div>
+ </div>
+
+{% endblock content %}

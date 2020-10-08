@@ -1,5 +1,5 @@
 body{
-	font-family: Comic Sans MS;
+	font-family: 'Source Serif Pro', serif;
 }
 *{
 	margin: 0;
@@ -8,27 +8,20 @@ body{
 	text-decoration: none;
 }
 .menubar{
-	background-color: rgb(204,255,255);
-
+	background-color:#132743;
+    height: 65px;
 	text-align: right;
 }
 .menubar ul{
 	display: inline-flex;
 	list-style: none;
-	color: #FC0527;
+	color: #f9fcfb;
 }
 .menubar ul li{
-<<<<<<< HEAD
-	width: 250px;
 	margin: 7px;
 	padding: 7px;
-	font-size: 28px;
-=======
-	width: 200px;
-	margin: 1px;
-	padding: 1px;
-	font-size: 37px;
->>>>>>> ee8f007e84f26c0b050b2f0314a0430ca4baa4b7
+	font-size: 18px;
+
 }
 .menubar ul li a:hover{
 	color: #39dc79;
@@ -46,7 +39,7 @@ body{
 	height: 100%;
 	width: 100%;
 	line-height: 65px;
-	font-size: 22px;
+	font-size: 18px;
 	color: white;
 	padding-left: 40px;
 	box-sizing: border-box;
@@ -108,3 +101,14 @@ section{
 	height: 100vh;
 	transition: all .5s;
 }
+
+.inden{
+   color: @darkTextColor;
+  width: 120px;
+  display: inline-block;
+  margin-bottom: 10px;
+
+  }
+}
+
+	

@@ -11,18 +11,28 @@
 <table>
   <thead>
     <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Job Title</th>
+     <th>EXAM DATE</th>
+     <th>TIME</th>
+     <th>Invigilator</th>
+     <th>Invigilator id</th>
+     <th>ROOMNO</th>
+     <th>SUBJECT</th>
+     <th>DEPARTMENT</th>
+     <th>SEMESTER</th>
       
     </tr>
   </thead>
   <tbody>
     {% for i in data %} 
     <tr>
-      <td data-column="First Name">{{i.roomno}}</td>
-      <td data-column="Last Name">{{i.roomcapacity}}</td>
-      <td data-column="Job Title">{{i.room_status}}</td>
+      <td data-column="EXAM DATE">{{ i.ex.exam_date }}</td>
+      <td data-column="TIME">{{ i.ex.exam_time }}</td>
+      <td data-column="Invigilator">{{ i.fna1.fname }}</td>
+      <td data-column="Invigilator id">{{ i.fna1.faculty_id}}</td>
+      <td data-column="ROOMNO">{{ i.room.roomno }}</td>
+      <td data-column="SUBJECT">{{ i.subject }}</td>
+      <td data-column="DEPARTMENT">{{ i.dept }}</td>
+      <td data-column="SEMESTER">{{ i.semester }}</td>
       
     </tr>
     {% endfor %}

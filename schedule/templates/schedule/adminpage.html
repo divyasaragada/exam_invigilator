@@ -4,16 +4,19 @@
 <head>
 	<meta charset="utf-8">
 	<title>Admin Page</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="{% static   'css/mystyle.css' %}">
+	<link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 <body>
 	<input type="checkbox" id="check">
-	<label for="check">
+	
+	<div class="menubar">
+		<label for="check">
 		<i class="fas fa-bars" id="btn"></i>
 		<i class="fas fa-times" id="cancel"></i>
-	</label>
-	<div class="menubar">
+	    </label>
 	<ul>
 		<li><a href="{% url 'timetable' %}">VIEW TIMETABLE</a></li>
 		<li><a href="{% url 'home' %}">LOGOUT</a></li>
@@ -21,7 +24,8 @@
 	</div>
 	<div class="sidebar">
 		<ul>
-			<li><a href="#">CREATE EXAM</a></li>
+			<li><a href="{% url 'addexam' %}">CREATE EXAM</a></li>
+			<li><a href="{% url 'assignfac' %}">ASSIGN FACULTY</a></li>
 			<li><a href="#">ADD ROOM</a></li>
 			<li><a href="#">ADD FACULTY</a></li>
 			<li><a href="#">UPDATE FACULTY STATUS</a></li>
@@ -29,6 +33,11 @@
 			<li><a href="#">VIEW FACULTY CONSTRAINTS</a></li>
 		</ul>
 	</div>
-	<section></section>
+	<section>
+		{% include 'schedule/messages.html' %}
+
+		 {% block content %}
+     {% endblock content %}
+	</section>
 </body>
 </html>
