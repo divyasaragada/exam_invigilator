@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>search</title>
+  <link rel="stylesheet" type="text/css" href="{% static   'css/mystyle1.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+<br><br>
+<div class="search-btn">
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for faculty id..">
+  <button>
+    <i class="fa fa-search"></i>
+  </button>
+</div>
+<table id="myTable">
+  <thead>
+    <tr>
+      <th>FACULTY ID</th>
+      <th>FACULTY NAME</th>
+      <th>STATUS</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in data %} 
+    <tr>
+      <td data-column="FACULTY ID">{{i.faculty_id}}</td>
+      <td data-column="FACULTY NAME">{{i.fname}}</td>
+      <td data-column="STATUS">
+        <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider round"></span>
+        </label>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class="dropdown">
+  <ul>
+    <li><a href="#">TIMETABLE</a>
+      <ul>
+        <li><a href="#">CSE</a>
+          <ul>
+            <li><a href="#">1 CSE 1</a></li>
+            <li><a href="#">1 CSE 2</a></li>
+            <li><a href="#">2 CSE 1</a></li>
+            <li><a href="#">2 CSE 2</a></li>
+            <li><a href="#">3 CSE 1</a></li>
+            <li><a href="#">3 CSE 2</a></li>
+            <li><a href="#">4 CSE 1</a></li>
+            <li><a href="#">4 CSE 2</a></li>
+          </ul>
+        </li>
+        <li><a href="#">IT</a>
+          <ul>
+            <li><a href="#">1 IT</a></li>
+            <li><a href="#">2 IT</a></li>
+            <li><a href="#">3 IT</a></li>
+            <li><a href="#">4 IT</a></li>
+          </ul>
+        </li>
+        <li><a href="#">ECE</a>
+          <ul>
+            <li><a href="#">1 ECE 1</a></li>
+            <li><a href="#">1 ECE 2</a></li>
+            <li><a href="#">2 ECE 1</a></li>
+            <li><a href="#">2 ECE 2</a></li>
+            <li><a href="#">3 ECE 1</a></li>
+            <li><a href="#">3 ECE 2</a></li>
+            <li><a href="#">4 ECE 1</a></li>
+            <li><a href="#">4 ECE 2</a></li>
+          </ul>
+        </li>
+        <li><a href="#">EEE</a>
+          <ul>
+            <li><a href="#">1 EEE</a></li>
+            <li><a href="#">2 EEE</a></li>
+            <li><a href="#">3 EEE</a></li>
+            <li><a href="#">4 EEE</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>                                                                         
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+</body>
+</html>
