@@ -6,8 +6,8 @@
   
   <div class="col-md-6">
    <div class="card w-100">
-      <div class="card-header text-center text-info" >ASSIGN FACULTY HERE</div>
-     <form action="{% url 'assignfac' x.id %}" method="POST">
+      <div class="card-header text-center text-info" >UPDATE HERE</div>
+     <form action="{% url 'update' data.id %}" method="POST">
           {% csrf_token %}
       <div class="card-body text-center">
             <h3>ENTERED EXAM ID IS:&nbsp;{{ x.id }}</h3>
@@ -15,18 +15,18 @@
             <br>
              <label class="inden">ROOM : </label>
               
-                    <select name="room" id="id">
-                      <option selected></option>
+                    <select name="room"  id="id">
+                      <option value="{{data.room.roomno}}" selected>{{data.room.roomno}}</option>
       	            {% for i in z %}
-                    <option >{{ i.roomno}}</option>
+                    <option>{{ i.roomno}}</option>
                     {% endfor %}
                     </select>
            <br>
 
           <label class="inden">FACULTY&nbsp;1:  </label> 
                 
-                      <select name="fname" id="id">
-                         
+                      <select name="fname"  id="id">
+                          <option value="{{data.fna1.fname}}" selected>{{ data.fna1.fname }}</option>
                          {% for i in y %}
                          <option >{{ i.fname }}</option>
                         {% endfor %}
@@ -34,38 +34,39 @@
             <br>
             <label class="inden">FACULTY&nbsp;2:  </label> 
                 
-                      <select name="fna2" id="id">
-                       <!---<option selected></option>-->
+                      <select name="fna2"   id="id">
+                         <option value="{{data.fna2}}" selected>{{data.fna2}}</option>
                          {% for i in y %}
                          <option >{{ i.fname }}</option>
                         {% endfor %}
                       </select>
             <br>
        <label class="inden">SEMESTER :  </label>
-       <input type="text" name="sem" placeholder="enter semester ('1-2') ">
+       <input type="text" name="sem" value="{{data.semester}}" placeholder="enter semester ('1-2') ">
       <br>
        <label class="inden">SUBJECT :</label>
-       <input type="text" name="sub" placeholder="enter subject ">
+       <input type="text" name="sub" value="{{data.subject}}" placeholder="enter subject ">
        <br>
          <label class="inden">DEPARTMENT :</label>
 
          <select name = "dept" id ="dept">
+           <option value="{{data.dept}}" selected>{{data.dept}}</option>
            <option>CSE</option>
-
            <option>ECE</option>
            <option>EEE</option>
            <option>IT</option>
          </select>
          
         
-      
+      </select>
    <br>
        </div>
     <div class="card-footer text-center" >
-      <a href="{% url 'adminpage' %}" <button class="btn btn-warning" >Go&nbsp;Back</button></a>
-      <button class="btn btn-primary">ADD</button>
-      &nbsp; &nbsp;  &nbsp;
-      <a href="{% url 'timetable' %}" <button class="btn btn-info" >PREVIEW</button></a>
+      
+      <a href="{% url 'timetable' %}" <button class="btn btn-secondary" >Go&nbsp;Back</button></a> &nbsp; &nbsp;  &nbsp;
+      <button class="btn btn-primary">UPDATE</button>
+     
+
     </div>
        
     </form>

@@ -18,8 +18,7 @@ body{
 
 	font-family: 'Roboto', sans-serif;
 	background:url('/static/images/first.jpeg') ;
-	background-repeat: no-repeat;
-  background-attachment: ;  
+	background-repeat: no-repeat;  
   background-size: cover;
 	background-color: #ffbb91;
 

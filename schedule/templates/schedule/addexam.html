@@ -21,10 +21,33 @@
                 <br>
                 
      </div>
-    <div class="card-footer text-center" ><button class="btn btn-info">ADD</button></div>
+    <div class="card-footer text-center" >
+        <button class="btn btn-info">ADD&nbsp;EXAM</button>
+        &nbsp;&nbsp;&nbsp;
+          <a href="{% url 'adminpage'%}" <button class="btn btn-info" >ASSIGN&nbsp;FACULTY</button></a>
+        </div>
                 
     </form>
 </div>
 </div>
 </div>
+<br><br>
+<table class="mytable">
+
+    <tr>
+      <th>EXAMID</th>
+      <th>DATE</th>
+      <th>TIME</th>
+    </tr>
+
+    {% for i in data %}
+    <tr>
+     
+      <td>{{ i.id }}</td>
+      <td>{{ i.exam_date }}</td>
+      <td>{{ i.exam_time }}</td>
+    </tr>
+    {% endfor %}
+ 
+</table>
 {% endblock content %}

@@ -26,5 +26,9 @@ urlpatterns = [
     path('stud/',views.stud,name='stud'),
     path('adminpage/',views.adminpage,name='adminpage'),
     path('addexam/',views.addexam,name='addexam'),
-    path('assignfac/',views.assignfac,name='assignfac'),
+    path('facstatus/',views.facstatus,name='facstatus'),
+    path('assignfac/<int:exid>/',views.assignfac,name='assignfac'),
+    path('addfac/',views.addfac,name='addfac'),
+    path('delete/<int:cid>/',views.delete,name='delete'),
+    path('update/<int:cid>',views.update,name="update"),
 ]

@@ -1,0 +1,48 @@
+{% extends 'schedule/adminpage.html' %}
+{% block content %}
+<br><br><br>
+	<div  class="row">
+    <div class="col-sm-3"></div>
+  
+    <div class="col-md-6">
+     <div class="card">
+    <div class="card-header text-center text-info " >ADD&nbsp;FACULTY</div>
+	<form action="{% url 'addfac' %}" method="POST">
+		{% csrf_token %}
+     <div class="card-body text-center">
+     <label>FACULTY&nbsp;NAME :</label>
+     <input type="text" placeholder="Enter faculty name" name="fname" required>
+     <br>
+      <label>FACULTY&nbsp;ID:</label>
+    <input type="number" placeholder="Enter faculty id" name="fid" required>
+    <br>
+     <label>EMAIL:</label>
+    <input type="email" placeholder="Enter email" name="fmail" required>
+    <br>
+     <label>DEPARTMENT:</label>
+     <select name = "fdept" >
+           <option>CSE</option>
+
+           <option>ECE</option>
+           <option>EEE</option>
+           <option>IT</option>
+         </select>
+   
+    <br>
+    <label>STATUS:</label>
+    <select name = "st" >
+           <option>y</option>
+           <option>n</option>
+
+           
+       </select>
+   
+</div>
+<div class="card-footer text-center">
+	 <button class="btn btn-success">ADD&nbsp;FACULTY</button>
+	</div>
+</form>
+</div>
+</div>
+</div>
+    {% endblock content %}

@@ -12,12 +12,12 @@ def admin1(request):
 	if request.method=="POST":
 		uname=request.POST['uname']
 		passwd=request.POST['password']
-		
+		data=adminlogin.objects.get(username=uname,password=passwd)
 		try:
-			data=adminlogin.objects.get(username=uname,password=passwd)
 			if data:
-				
-				return render(request,'schedule/adminpage.html')
+				d=exam.objects.all()
+				return render(request,'schedule/adminpage.html',{'data':d})
+		
 		except Exception:
 			#return HttpResponse("please enter correct details...!!!")
 
@@ -64,21 +64,42 @@ def stud(request):
 
 	return render(request,'schedule/student.html')
 
+def delete(request,cid):
+	d=conduct.objects.get(id=cid)
+	d.delete()
+	data=conduct.objects.select_related('ex','fna1','room').all()
+	return render(request,'schedule/timetable.html',{'data':data})
 
-
-def timetable(req):
+def timetable(request):
 	
 	data=conduct.objects.select_related('ex','fna1','room').all()
-	return render(req,'schedule/timetable.html',{'data':data})
+	return render(request,'schedule/timetable.html',{'data':data})
 
 from django.contrib.auth.decorators import login_required
 
-@login_required
 def adminpage(request):
-	return render(request,'schedule/adminpage.html')
+	d=exam.objects.all()
+	if request.method=='POST':
+		exid=request.POST['id']
+
+		try:
+			d1=exam.objects.get(id=exid)
+			if d1:
+				data3=room.objects.filter(room_status='y')
+				s=conduct.objects.filter(ex=d1).values('fna1')
+				dy=faculty.objects.filter(faculty_status='y').exclude(fname__in=s)
+				return render(request,'schedule/assignfac.html',{'x':d1,'y':dy,'z':data3})
+		except Exception:
+			messages.warning(request,'Please provide valid exam ID..or go to create exam for new exam..!')
+			
+			return render(request,'schedule/adminpage.html',{'data':d})
+	
+	return render(request,'schedule/adminpage.html',{'data':d})
+	
 
 
 def addexam(request):
+	data=exam.objects.all()
 	if request.method=='POST':
 		i=request.POST['id']
 		date=request.POST['date']
@@ -91,28 +112,98 @@ def addexam(request):
 			messages.warning(request,'Please enter valid details!!!.......')
 			return render(request,'schedule/addexam.html')
 		
-	return render(request,'schedule/addexam.html')
+	return render(request,'schedule/addexam.html',{'data':data})
 
-def assignfac(request):
+def assignfac(request,exid):
 	if request.method=="POST":
-		i=request.POST['id']
+		i=exid
 		fname=request.POST['fname']
+		f=request.POST['fna2']
 		ro=request.POST['room']
 		sem=request.POST['sem']
 		sub=request.POST['sub']
 		dept=request.POST['dept']
-		try:
-			exobj=exam.objects.get(id=i)
-			r=room.objects.get(roomno=ro)
-			x=faculty.objects.get(fname=fname)
-			data=conduct.objects.create(fna1=x,ex=exobj,room=r,semester=sem,dept=dept,subject=sub)
-		
-		except Exception:
-			messages.info(request,'Please enter all the required details!!!.......')
-			return render(request,'schedule/assignfac.html')
-	data1=exam.objects.all()
+		exobj=exam.objects.get(id=i)
+		r=room.objects.get(roomno=ro)
+		x=faculty.objects.get(fname=fname)
+		data=conduct.objects.create(fna1=x,ex=exobj,fna2=f,room=r,semester=sem,dept=dept,subject=sub)
+
+		d1=exam.objects.get(id=exid)
+		s1=conduct.objects.filter(ex=d1).values('fna1')
+		s2=conduct.objects.filter(ex=d1).values('room')
+		dy=faculty.objects.filter(faculty_status='y').exclude(fname__in=s1)
+		data3=room.objects.filter(room_status='y').exclude(roomno__in=s2)
+		s3=conduct.objects.filter(ex=d1).values('fna2')
+		dz=dy.exclude(fname__in=s3)
+
+		return render(request,'schedule/assignfac.html',{'x':d1,'y':dz,'z':data3})
+
 	
-	data3=room.objects.filter(room_status='y')
-	dx=conduct.objects.all().values('fna1')
-	dy=faculty.objects.exclude(fname__in=dx)
-	return render(request,'schedule/assignfac.html',{'x':data1,'y':dy,'z':data3})
+		
+		# except Exception:
+		# 	messages.info(request,'Please enter all the required details!!!.......')
+		# 	return render(request,'schedule/addexam.html')
+	
+	d1=exam.objects.get(id=exid)
+	s1=conduct.objects.filter(ex=d1).values('fna1')
+	s2=conduct.objects.filter(ex=d1).values('room')
+	dy=faculty.objects.filter(faculty_status='y').exclude(fname__in=s1)
+	data3=room.objects.filter(room_status='y').exclude(roomno__in=s2)
+
+	s3=conduct.objects.filter(ex=d1).values('fna2')
+	dz=dy.exclude(fname__in=s3)
+	return render(request,'schedule/assignfac.html',{'x':d1,'y':dz,'z':data3})
+def facstatus(request):
+	data=faculty.objects.all()
+	return render(request,'schedule/facultyStatus.html',{'data':data})
+def addfac(request):
+	if request.method=="POST":
+		fname=request.POST['fname']
+		fid=request.POST['fid']
+		fmail=request.POST['fmail']
+		fdept=request.POST['fdept']
+		st=request.POST['st']
+		try:
+			data=faculty.objects.create(fname=fname,faculty_id=fid,email=fmail,dept=fdept,faculty_status=st)
+			return render(request,'schedule/addfac.html')
+		except Exception:
+			messages.warning(request,'Please enter all details!!!.......')
+			return render(request,'schedule/addfac.html')
+	return render(request,'schedule/addfac.html')
+def update(request,cid):
+	data=conduct.objects.get(id=cid)
+	
+	if request.method=="POST":
+		i=data.id
+		fe=request.POST['fname']
+		f=request.POST['fna2']
+		ro=request.POST['room']
+		sem=request.POST['sem']
+		sub=request.POST['sub']
+		dept=request.POST['dept']
+
+		data=conduct.objects.select_related('ex','fna1','room').get(id=i)
+		data.subject=sub
+		data.dept=dept
+		data.semester=sem
+		r=room.objects.get(roomno=ro)
+		x=faculty.objects.get(fname=fe)
+		data.fna2=f
+		data.fna1=x
+		data.room=r
+		data.save()
+
+		data1=conduct.objects.select_related('ex','fna1','room').all()
+		return render(request,'schedule/timetable.html',{'data':data1})
+
+	
+	d1=exam.objects.get(id=data.ex.id)
+	s1=conduct.objects.filter(ex=d1).values('fna1')
+	s2=conduct.objects.filter(ex=d1).values('room')
+	dy=faculty.objects.filter(faculty_status='y').exclude(fname__in=s1)
+	data3=room.objects.filter(room_status='y').exclude(roomno__in=s2)
+
+	s3=conduct.objects.filter(ex=d1).values('fna2')
+	dz=dy.exclude(fname__in=s3)
+	return render(request,'schedule/edit.html',{'data':data,'x':d1,'y':dz,'z':data3})
+

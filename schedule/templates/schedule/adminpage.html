@@ -4,10 +4,16 @@
 <head>
 	<meta charset="utf-8">
 	<title>Admin Page</title>
+	<!----bootrap link-->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+     <!---font awesome icons--->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 	<link rel="stylesheet" type="text/css" href="{% static   'css/mystyle.css' %}">
+      
 	<link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+	
 </head>
 <body>
 	<input type="checkbox" id="check">
@@ -25,8 +31,8 @@
 	<div class="sidebar">
 		<ul>
 			<li><a href="{% url 'addexam' %}">CREATE EXAM</a></li>
-			<li><a href="{% url 'assignfac' %}">ASSIGN FACULTY</a></li>
-			<li><a href="#">ADD ROOM</a></li>
+			<li><a href="{% url 'adminpage' %}">ASSIGN FACULTY</a></li>
+			<li><a href="{% url 'addfac' %}">ADD ROOM</a></li>
 			<li><a href="#">ADD FACULTY</a></li>
 			<li><a href="#">UPDATE FACULTY STATUS</a></li>
 			<li><a href="#">UPDATE ROOM STATUS</a></li>
@@ -37,6 +43,41 @@
 		{% include 'schedule/messages.html' %}
 
 		 {% block content %}
+		 <br><br><br>
+ <div  class="row">
+  <div class="col-sm-3"></div>
+  
+  <div class="col-md-6">
+   <div class="card">
+      <div class="card-header text-center text-info" >Enter exam ID to assign faculty:<br>(Or go to CREATE EXAM to create new exam)</div>
+		 <form action="{% url 'adminpage' %}" method="POST">
+		 	{% csrf_token %}
+		 	<div class="card-body text-center">
+		 		<label>EXAM&nbsp;ID:&nbsp;</label>
+          <input type="number" name="id">
+          &nbsp;<button class="btn btn-dark">Continue-></button>
+      </form>
+  </div>
+</div>
+    </div>
+    <br>
+    <br><br>
+ 
+
+  
+  <div class="col-lg-3">    <!-----md-6,12-->
+  	<h4>AVAILABLE EXAM ID'S</h4>
+   <div class="card">
+
+  	{% for i in data%}
+   
+       &nbsp;{{i.id}}&nbsp;----&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      {{i.exam_date}}&nbsp;&nbsp;
+      {{i.exam_time}}<br>
+    
+    {% endfor %} 
+ </div>
+</div>
      {% endblock content %}
 	</section>
 </body>

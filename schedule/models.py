@@ -29,6 +29,7 @@ class conduct(models.Model):
 	#faculty_id=models.ForeignKey(faculty, on_delete=models.CASCADE)---will do it while dispalying final timetable
 	#fna1=models.CharField(max_length=100,null=False)
 	fna1=models.ForeignKey(faculty,on_delete=models.CASCADE)
+	fna2=models.CharField(max_length=50,null=True)
 	ex=models.ForeignKey(exam,on_delete=models.CASCADE)
 	room=models.ForeignKey(room, on_delete=models.CASCADE)
 

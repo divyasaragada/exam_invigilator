@@ -13,7 +13,7 @@
 <br><br>
 <div class="search-btn">
   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for faculty id..">
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for faculty name..">
   <button>
     <i class="fa fa-search"></i>
   </button>
@@ -34,7 +34,7 @@
       <td data-column="FACULTY NAME">{{i.fname}}</td>
       <td data-column="STATUS">
         <label class="switch">
-          <input type="checkbox" checked>
+          <input type="checkbox" value="{{ i.faculty_status }}">
           <span class="slider round"></span>
         </label>
       </td>
@@ -101,7 +101,7 @@ function myFunction() {
 
   // Loop through all table rows, and hide those who don't match the search query
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
+    td = tr[i].getElementsByTagName("td")[1];
     if (td) {
       txtValue = td.textContent || td.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {

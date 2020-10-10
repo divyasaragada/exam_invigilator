@@ -1,41 +1,38 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" type="text/css" href="{% static   'css/style1.css' %}">
-  <title></title>
-</head>
-
-</html>
-<body>
-<table>
+{% extends 'schedule/adminpage.html' %}
+{% block content %}
+<br>
+<table class="mytable">
   <thead>
     <tr>
-     <th>EXAM DATE</th>
+     <th>EXAM__DATE</th>
      <th>TIME</th>
-     <th>Invigilator</th>
-     <th>Invigilator id</th>
+     <th>Invigilator&nbsp;1</th>
+     <th>Invigilator&nbsp;2</th>
      <th>ROOMNO</th>
      <th>SUBJECT</th>
      <th>DEPARTMENT</th>
      <th>SEMESTER</th>
+     <th>EDIT</th>
+     <th>DELETE</th>
       
     </tr>
   </thead>
   <tbody>
     {% for i in data %} 
     <tr>
-      <td data-column="EXAM DATE">{{ i.ex.exam_date }}</td>
+      <td data-column="EXAM__DATE">{{ i.ex.exam_date }}</td>
       <td data-column="TIME">{{ i.ex.exam_time }}</td>
-      <td data-column="Invigilator">{{ i.fna1.fname }}</td>
-      <td data-column="Invigilator id">{{ i.fna1.faculty_id}}</td>
+      <td data-column="Invigilator&nbsp;1">{{ i.fna1.fname }}</td>
+      <td data-column="Invigilator&nbsp;2">{{ i.fna2}}</td>
       <td data-column="ROOMNO">{{ i.room.roomno }}</td>
       <td data-column="SUBJECT">{{ i.subject }}</td>
       <td data-column="DEPARTMENT">{{ i.dept }}</td>
       <td data-column="SEMESTER">{{ i.semester }}</td>
+      <td data-column="EDIT"><a href="{% url 'update' i.id %}"><i class="fa fa-edit" style="font-size: 25px;color:#0d7377" ></i></a></td>
+      <td data-column="DELETE"><a href="{% url 'delete' i.id %}"><i class="fa fa-trash" style="font-size:25px;color:#ff414d"></a></i></td>
       
     </tr>
     {% endfor %}
   </tbody>
 </table>
-</body>
+{% endblock content %}
