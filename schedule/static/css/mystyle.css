@@ -1,3 +1,4 @@
+
 .mytable { 
 	width: 700px; 
 	border-collapse: collapse; 
@@ -140,6 +141,47 @@ section{
   margin-bottom: 10px;
 
   }
+
+
+.dropdown{
+  position: absolute;
+  top: 250px;
+  right: 260px;
+}
+.dropdown ul{
+  display: inline-flex;
+  list-style: none;
+  margin-top: 2%;
+}
+.dropdown ul li a{
+  text-decoration: none;
+  color: #f90606;
+}
+.dropdown ul li{
+  background: #ff9999;
+  width: 170px;
+  border: 1px solid #fff;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  float: left;
+  color: #39dc79;
+  font-size: 23px;
+  position: relative;
+  font-family: big john;
+}
+.dropdown ul li:hover{
+  color: #39dc79;
+}
+.dropdown ul ul{
+  display: none;
+}
+.dropdown ul li:hover > ul{
+  display: block;
+}
+.dropdown ul ul ul{
+  margin-left: 130px;
+  top: 0;
+  position: absolute;
 }
 
-	

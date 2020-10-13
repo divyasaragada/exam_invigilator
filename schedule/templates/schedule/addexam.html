@@ -1,43 +1,24 @@
-{% extends 'schedule/adminpage.html' %}
-{% block content %}
-<br><br><br>
-	<div  class="row">
-    <div class="col-sm-3"></div>
+{% extends 'schedule/adminstart.html' %}
+{% block styles %}
+{% endblock %}
+  {% block content %}
+    <br><br>
+	  <div  class="row">
+     <div class="col-sm-2"></div>
   
-    <div class="col-md-6">
+    <div class="col-md-8">
      <div class="card">
     <div class="card-header text-center text-info " >CREATE AN EXAM</div>
-	<form action="{% url 'addexam' %}" method="POST">
-		{% csrf_token %}
-     <div class="card-body text-center">
-		<label class="inden">ID : </label> 
-                <input type="number" name="id" placeholder="id">
-		<br>
-	  <label class="inden">DATE : </label> 
-                <input type="date" name="date" placeholder="Enter exam date">
-           <br>
-      <label class="inden">TIME :</label> 
-                <input type="text" name="time" placeholder="Enter time">
-                <br>
-                
-     </div>
-    <div class="card-footer text-center" >
-        <button class="btn btn-info">ADD&nbsp;EXAM</button>
-        &nbsp;&nbsp;&nbsp;
-          <a href="{% url 'adminpage'%}" <button class="btn btn-info" >ASSIGN&nbsp;FACULTY</button></a>
-        </div>
-                
-    </form>
-</div>
-</div>
-</div>
-<br><br>
+	
+   
+<br>
 <table class="mytable">
 
     <tr>
       <th>EXAMID</th>
-      <th>DATE</th>
-      <th>TIME</th>
+      <th>EXAM_DATE</th>
+      <th>EXAM_TIME</th>
+      <th>ADD</th>
     </tr>
 
     {% for i in data %}
@@ -46,8 +27,18 @@
       <td>{{ i.id }}</td>
       <td>{{ i.exam_date }}</td>
       <td>{{ i.exam_time }}</td>
+      <td><a href="{% url 'dele' i.id %}"><button class="btn btn-danger">DELETE&nbsp;</button></a></td>
     </tr>
     {% endfor %}
- 
+  <tr>
+     <form action="{% url 'addexam' %}" method="POST">
+    {% csrf_token %}
+      <td><input type="number" name="id" placeholder="id"></td>
+      <td><input type="date" name="date" placeholder="Enter exam date"></td>
+      <td><input type="text" name="time" placeholder="Enter time"></td>
+      
+      <td><button class="btn btn-info">ADD&nbsp;EXAM</button></td>
+    </tr>
 </table>
+</form>
 {% endblock content %}

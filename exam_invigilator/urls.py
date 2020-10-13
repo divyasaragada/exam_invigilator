@@ -27,8 +27,11 @@ urlpatterns = [
     path('adminpage/',views.adminpage,name='adminpage'),
     path('addexam/',views.addexam,name='addexam'),
     path('facstatus/',views.facstatus,name='facstatus'),
+    path('roomstatus/',views.roomstatus,name='roomstatus'),
     path('assignfac/<int:exid>/',views.assignfac,name='assignfac'),
     path('addfac/',views.addfac,name='addfac'),
+    path('addroom/',views.addroom,name='addroom'),
     path('delete/<int:cid>/',views.delete,name='delete'),
     path('update/<int:cid>',views.update,name="update"),
+    path('dele/<int:exid>/',views.dele,name="dele"),
 ]

@@ -106,13 +106,24 @@ def addexam(request):
 		time=request.POST['time']
 		try:
 			data=exam.objects.create(id=i,exam_date=date,exam_time=time)
-			return render(request,'schedule/addexam.html')
+			data=exam.objects.all()
+
+			return render(request,'schedule/addexam.html',{'data':data})
 	
 		except Exception:
+			data=exam.objects.all()
 			messages.warning(request,'Please enter valid details!!!.......')
-			return render(request,'schedule/addexam.html')
+			return render(request,'schedule/addexam.html',{'data':data})
 		
 	return render(request,'schedule/addexam.html',{'data':data})
+
+
+def dele(request,exid):
+	d=exam.objects.get(id=exid)
+	d.delete()
+	data=exam.objects.all()
+	return render(request,'schedule/addexam.html',{'data':data})
+      
 
 def assignfac(request,exid):
 	if request.method=="POST":
@@ -153,9 +164,34 @@ def assignfac(request,exid):
 	s3=conduct.objects.filter(ex=d1).values('fna2')
 	dz=dy.exclude(fname__in=s3)
 	return render(request,'schedule/assignfac.html',{'x':d1,'y':dz,'z':data3})
+
 def facstatus(request):
+	if request.method=="POST":
+		i=request.POST['id']
+		d=faculty.objects.get(faculty_id=i)
+		if(d.faculty_status=='y'):
+			d.faculty_status='n'
+		else:
+			d.faculty_status='y'
+		d.save()
+		data=faculty.objects.all()
+		return render(request,'schedule/facultyStatus.html',{'data':data})
 	data=faculty.objects.all()
 	return render(request,'schedule/facultyStatus.html',{'data':data})
+def roomstatus(request):
+	if request.method=="POST":
+		i=request.POST['id']
+		d=room.objects.get(roomno=i)
+		if(d.room_status=='y'):
+			d.room_status='n'
+		else:
+			d.room_status='y'
+		d.save()
+		data=room.objects.all()
+		return render(request,'schedule/roomstatus.html',{'data':data})
+	data=room.objects.all()
+	return render(request,'schedule/roomstatus.html',{'data':data})
+
 def addfac(request):
 	if request.method=="POST":
 		fname=request.POST['fname']
@@ -170,6 +206,20 @@ def addfac(request):
 			messages.warning(request,'Please enter all details!!!.......')
 			return render(request,'schedule/addfac.html')
 	return render(request,'schedule/addfac.html')
+
+
+def addroom(request):
+	if request.method=="POST":
+		fname=request.POST['rno']
+		fid=request.POST['rcd']
+		st=request.POST['st']
+		try:
+			data=room.objects.create(roomno=fname,roomcapacity=fid,room_status=st)
+			return render(request,'schedule/addroom.html')
+		except Exception:
+			messages.warning(request,'Please enter all details!!!.......')
+			return render(request,'schedule/addroom.html')
+	return render(request,'schedule/addroom.html')
 def update(request,cid):
 	data=conduct.objects.get(id=cid)
 	

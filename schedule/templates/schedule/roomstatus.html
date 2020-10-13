@@ -1,0 +1,95 @@
+{% extends 'schedule/adminstart.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+     <!---font awesome icons--->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static   'css/mystyle2.css' %}">
+ 
+{% endblock %}
+{%  block content %}
+<br>
+<div class="search-btn">
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for faculty name..">
+  <button style="font-size:25px;border-color:orange;">
+    <i class="fa fa-search"></i>
+  </button>
+</div>
+<div  class="row">
+     <div class="col-sm-2"></div>
+  
+    <div class="col-md-6">
+     <div class="card">
+    <div class="card-header text-center text-info " >UPDATE ROOM STATUS</div>
+  
+   
+<br>
+<table class="mytable">
+
+    <tr>
+      <th>ROOMNO</th>
+      <th>CAPACITY</th>
+      <th>STATUS</th>
+      <th>CHANGE </th>
+    </tr>
+
+    {% for i in data %}
+    <tr>
+      <form action="{% url 'roomstatus' %}" method="POST">
+          {% csrf_token %} 
+           <td>{{ i.roomno }}</td>
+      <td>{{ i.roomcapacity }}
+      <input size="6" style="visibility: hidden;" type="number" name="id" value="{{ i.roomno }}" style="color:blue"></td>
+     
+     <td><button class="btn btn-light" style="font-size: 20px">{{i.room_status}}</button></td>
+    <td><button class="btn btn-info">Change</button></td>
+      </form>
+      </td>
+      
+    </tr>
+    {% endfor %}
+    
+</table>
+</div>
+</div>
+</div>
+<!-- <script type="text/javascript">
+            function toggle(button)
+            {
+              if(document.getElementById("").value=="y")
+              {
+               document.getElementById("{{ this.faculty_id }}").value="n";
+              }
+              else
+              {
+                document.getElementById("{{ this.faculty_id }}").value="y";
+              }
+            }
+        </script>-->
+       
+                                                              
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+{% endblock content %}
