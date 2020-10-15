@@ -1,0 +1,40 @@
+#fac-request {
+  border-collapse: collapse;
+  width: 50%;
+  padding: 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+  font-size: 18px;
+  position: absolute;
+  top: 180px;
+  left: 270px;
+}
+.title{
+	color: #ba68c8;
+}
+th,td{
+  border: 2px solid #ddd;
+  padding: 12px 15px;
+}
+th{
+  background: #ba68c8;
+  color: #fafafa
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+}
+
+td{
+  font-family: 'Open Sans' ,sans-serif;
+}
+
+tr:nth-child(odd){
+  background-color: #eeeeee;
+}
+.calender{
+   color: @darkTextColor;
+  width: 175px;
+  display: inline-block;
+  margin-bottom: 2px;
+}
+
+
