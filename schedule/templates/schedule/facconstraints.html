@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>faculty constraints</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+     <!---font awesome icons--->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" type="text/css" href="{% static   'css/email.css' %}">
+      
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+<center>
+    <br><br><br><br><br>
+    <div class="title">
+      <h1>FACULTY CONSTRAINTS</h1>
+    </div>
+</center>
+  <form action="{% url 'faccons' %}" method="POST">
+    {% csrf_token %}
+    <br><br><br>
+<table id="fac-request">
+  <tr class="header">
+    <th style="width: 40%;">FACULTY NAME</th>
+    <th style="width: 50%;">REQUEST</th>
+  </tr>
+  <tbody>
+    {% for i in data %} 
+    <tr>
+      <td data-column="FACULTY NAME">{{i.fname}}</td>
+      <td data-column="status">
+        <label class="calender">NOT&nbsp;AVAILABLE&nbsp;ON:</label> 
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table> 
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>
