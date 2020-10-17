@@ -52,13 +52,15 @@ class student(models.Model):
 class adminlogin(models.Model):
 	username=models.CharField(max_length=50,null=False)
 	password=models.CharField(max_length=50,null=False)
-class number(models.Model):
-	noofexams=models.IntegerField()
+
 class constraints(models.Model):
 	cname=models.CharField(max_length=50,null=False)
 	cdate=models.DateField(null=False)
 class tt(models.Model):
-	cse=models.ImageField()
+	btt=models.ImageField(default='null')
+	bname=models.CharField(max_length=50,null='False')
+	branch=models.CharField(max_length=5,default='CSE')
+
 	
 
 

@@ -4,45 +4,27 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
      <!---font awesome icons--->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<<<<<<< HEAD
-  
   <link rel="stylesheet" type="text/css" href="{% static   'css/mystyle2.css' %}">
- 
-=======
-  <link rel="stylesheet" type="text/css" href="{% static  'css/mystyle2.css' %}">
->>>>>>> d80c5c2576b290263e5b651a7747e83d3f1880b7
+
 {% endblock %}
 {%  block content %}
 <br>
 <div class="search-btn">
   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<<<<<<< HEAD
-  <input type="text" id="myInput" onkeyup="Function()" placeholder="Search for faculty name..">
-=======
-  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for faculty id..">
->>>>>>> d80c5c2576b290263e5b651a7747e83d3f1880b7
+
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for faculty name..">
+
   <button style="font-size:25px;border-color:orange;">
     <i class="fa fa-search"></i>
   </button>
 </div>
 <div  class="row">
      <div class="col-sm-2"></div>
-  
-<<<<<<< HEAD
-      <div class="col-md-6">
-      <div class="card">
-        <div class="card-header text-center text-info " >UPDATE FACULTY STATUS</div>
-<br>
-<table id="mytable">
-
-    <tr>
-=======
     <div class="col-md-6">
      <div class="card">
     <div class="card-header text-center text-info " >UPDATE FACULTY STATUS</div>
 <table id="myTable">
   <tr>
->>>>>>> d80c5c2576b290263e5b651a7747e83d3f1880b7
       <th>NAME</th>
       <th>ID</th>
       <th>STATUS</th>
@@ -69,77 +51,39 @@
 </div>
 </div>
 </div>
-<<<<<<< HEAD
-<script>
-function Function() {
-  // Declare variables
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
 
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[1];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } 
-      else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-</script>
        
-=======
 
->>>>>>> d80c5c2576b290263e5b651a7747e83d3f1880b7
 <div class="dropdown">
   <ul>
     <li><a href="#">TIMETABLE</a>
       <ul>
         <li><a href="#">CSE</a>
           <ul>
-            <li><a href="#">1 CSE 1</a></li>
-            <li><a href="#">1 CSE 2</a></li>
-            <li><a href="#">2 CSE 1</a></li>
-            <li><a href="#">2 CSE 2</a></li>
-            <li><a href="#">3 CSE 1</a></li>
-            <li><a href="#">3 CSE 2</a></li>
-            <li><a href="#">4 CSE 1</a></li>
-            <li><a href="#">4 CSE 2</a></li>
+            {% for i in x %}
+            <li><a href="{% url 'showtt' i.bname%}">{{ i.bname }}</a></li>
+            {% endfor %}
+
           </ul>
         </li>
         <li><a href="#">IT</a>
-          <ul>
-            <li><a href="#">1 IT</a></li>
-            <li><a href="#">2 IT</a></li>
-            <li><a href="#">3 IT</a></li>
-            <li><a href="#">4 IT</a></li>
+          <ul>{% for i in y %}
+            <li><a href="{% url 'showtt' i.bname%}">{{ i.bname }}</a></li>
+            {% endfor %}
           </ul>
         </li>
         <li><a href="#">ECE</a>
           <ul>
-            <li><a href="#">1 ECE 1</a></li>
-            <li><a href="#">1 ECE 2</a></li>
-            <li><a href="#">2 ECE 1</a></li>
-            <li><a href="#">2 ECE 2</a></li>
-            <li><a href="#">3 ECE 1</a></li>
-            <li><a href="#">3 ECE 2</a></li>
-            <li><a href="#">4 ECE 1</a></li>
-            <li><a href="#">4 ECE 2</a></li>
+            {% for i in z %}
+            <li><a href="{% url 'showtt' i.bname%}">{{ i.bname }}</a></li>
+            {% endfor %}
           </ul>
         </li>
         <li><a href="#">EEE</a>
           <ul>
-            <li><a href="#">1 EEE</a></li>
-            <li><a href="#">2 EEE</a></li>
-            <li><a href="#">3 EEE</a></li>
-            <li><a href="#">4 EEE</a></li>
+            {% for i in w %}
+            <li><a href="{% url 'showtt' i.bname%}">{{ i.bname }}</a></li>
+            {% endfor %}
           </ul>
         </li>
       </ul>

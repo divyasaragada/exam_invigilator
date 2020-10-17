@@ -11,7 +11,7 @@
 <br>
 <div class="search-btn">
   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for faculty name..">
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for roomno..">
   <button style="font-size:25px;border-color:orange;">
     <i class="fa fa-search"></i>
   </button>
@@ -25,7 +25,7 @@
   
    
 <br>
-<table class="mytable">
+<table id="myTable">
 
     <tr>
       <th>ROOMNO</th>
@@ -80,7 +80,7 @@ function myFunction() {
 
   // Loop through all table rows, and hide those who don't match the search query
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[1];
+    td = tr[i].getElementsByTagName("td")[0];
     if (td) {
       txtValue = td.textContent || td.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {

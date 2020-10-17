@@ -119,7 +119,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-MEDIA_ROOT=os.path.join(BASE_DIR,'myapp1/static/images')
+MEDIA_ROOT=os.path.join(BASE_DIR,'schedule/static/images')
 MEDIA_URL='/images/'
 
 
@@ -127,3 +127,11 @@ MEDIA_URL='/images/'
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+
+EMAIL_USE_TLS=True
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=587
+EMAIL_HOST_USER=''
+EMAIL_HOST_PASSWORD=''

@@ -38,5 +38,11 @@ urlpatterns = [
     path('request/',views.request,name='request'),
     path('facstart/',views.facstart,name='facstart'),
     path('facconstraints',views.facconstraints,name='facconstraints'),
-     path('delet/<int:id>/',views.delet,name="delet"),
+    path('delet/<int:id>/',views.delet,name="delet"),
+
+     path('addtt',views.addtt,name="addtt"),
+     path('deltt/<str:name>',views.deltt,name="deltt"),
+
+    path('showtt/<str:name>/',views.showtt,name="showtt"),
 ]
+

@@ -18,12 +18,14 @@
 </head>
 <body>
 	<input type="checkbox" id="check">
+		
 	
-	<div class="menubar">
+	<div class="menubar" id="nav1">
 		<label for="check">
 		<i class="fas fa-bars" id="btn"></i>
 		<i class="fas fa-times" id="cancel"></i>
 	    </label>
+		
 	<ul>
 		<li><a href="{% url 'timetable' %}">SEND&nbsp;EMAIL</a></li>
 		<li><a href="{% url 'timetable' %}">VIEW TIMETABLE</a></li>
@@ -39,6 +41,7 @@
 			<li><a href="{% url 'facstatus' %}">UPDATE FACULTY STATUS</a></li>
 			<li><a href="{% url 'roomstatus' %}">UPDATE ROOM STATUS</a></li>
 			<li><a href="{% url 'facconstraints' %}">VIEW FACULTY CONSTRAINTS</a></li>
+			<li><a href="{% url 'addtt' %}">ADD TT</a></li>
 		</ul>
 	</div>
 	<section>
@@ -48,5 +51,6 @@
 		 
      {% endblock content %}
 	</section>
+	
 </body>
 </html>

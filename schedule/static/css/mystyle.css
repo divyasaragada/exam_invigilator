@@ -40,6 +40,7 @@ body{
 	text-decoration: none;
 }
 .menubar{
+   
 	background-color:#132743;
     height: 65px;
 	text-align: right;
@@ -87,6 +88,7 @@ ul li:hover a{
 	margin-right: 16px;
 }
 #check{
+
 	display: none;
 }
 label #btn,label #cancel{
@@ -186,4 +188,3 @@ label #cancel{
   top: 0;
   position: absolute;
 }
-
