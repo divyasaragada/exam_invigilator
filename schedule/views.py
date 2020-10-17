@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 
 from django.http import HttpResponse 
-from schedule.models import faculty,room,exam,student,number,adminlogin,conduct
+from schedule.models import faculty,room,exam,student,number,adminlogin,conduct,constraints
 
 def home(request):
 	
@@ -36,8 +36,8 @@ def fac(request):
 		try:
 			data=faculty.objects.get(faculty_id=id1,email=email,dept=dept)
 			if data:
-				messages.success(request,"logged in successfully!!..")
-				return render(request,'schedule/faculty.html')
+				
+				return render(request,'schedule/facstart.html',{'data':data})
 		except Exception:
 			messages.warning(request,'Please enter valid details!!!.......')
 			return render(request,'schedule/faculty.html')
@@ -256,4 +256,44 @@ def update(request,cid):
 	s3=conduct.objects.filter(ex=d1).values('fna2')
 	dz=dy.exclude(fname__in=s3)
 	return render(request,'schedule/edit.html',{'data':data,'x':d1,'y':dz,'z':data3})
+
+def facstart(request):
+	
+	
+	return render(request,'schedule/facstart.html')
+def timetable2(request):
+	data=conduct.objects.select_related('ex','fna1','room').all()
+	return render(request,'schedule/timetable2.html',{'data':data})
+	
+def request(request):
+	if request.method=="POST":
+		d=request.POST['date']
+		i=request.POST['id']
+
+		try:
+			s1=conduct.objects.filter(ex__exam_date=d).values('fna1')
+			s2=conduct.objects.filter(ex__exam_date=d).values('fna2')
+			f1=faculty.objects.get(fname__in=s1)
+			f2=faculty.objects.get(fname__in=s2)
+			data=faculty.objects.get(faculty_id=i)
+
+			if data.fname==f1.fname or data.fname==f2.fname:
+				constraints.objects.create(cname=data.fname,cdate=d)
+				messages.success(request,"request sent successfully..")	
+				return render(request,'schedule/request.html')
+			else:
+				messages.warning(request,"No invigilation on this date",d)
+				return render(request,'schedule/timetable2.html')
+		except Exception:
+			messages.warning(request,"please try again")
+			return render(request,'schedule/facstart.html')
+	return render(request,'schedule/request.html')
+def facconstraints(request):
+	data=constraints.objects.all()
+	return render(request,'schedule/facconstraints.html',{'data':data})
+def delet(request,id):
+	data=constraints.objects.get(id=id)
+	data.delete()
+	data=constraints.objects.all()
+	return render(request,'schedule/facconstraints.html',{'data':data})
 

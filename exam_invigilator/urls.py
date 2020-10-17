@@ -34,4 +34,9 @@ urlpatterns = [
     path('delete/<int:cid>/',views.delete,name='delete'),
     path('update/<int:cid>',views.update,name="update"),
     path('dele/<int:exid>/',views.dele,name="dele"),
+    path('timetable2/',views.timetable2,name='timetable2'),
+    path('request/',views.request,name='request'),
+    path('facstart/',views.facstart,name='facstart'),
+    path('facconstraints',views.facconstraints,name='facconstraints'),
+     path('delet/<int:id>/',views.delet,name="delet"),
 ]

@@ -9,9 +9,6 @@
      <!---font awesome icons--->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="{% static   'css/mystyle.css' %}">
- 
-
-	<link rel="stylesheet" type="text/css" href="{% static   'css/mystyle.css' %}">
       
 	<link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -28,6 +25,7 @@
 		<i class="fas fa-times" id="cancel"></i>
 	    </label>
 	<ul>
+		<li><a href="{% url 'timetable' %}">SEND&nbsp;EMAIL</a></li>
 		<li><a href="{% url 'timetable' %}">VIEW TIMETABLE</a></li>
 		<li><a href="{% url 'home' %}">LOGOUT</a></li>
 	</ul>
@@ -40,7 +38,7 @@
 			<li><a href="{% url 'addroom' %}">ADD ROOM</a></li>
 			<li><a href="{% url 'facstatus' %}">UPDATE FACULTY STATUS</a></li>
 			<li><a href="{% url 'roomstatus' %}">UPDATE ROOM STATUS</a></li>
-			<li><a href="#">VIEW FACULTY CONSTRAINTS</a></li>
+			<li><a href="{% url 'facconstraints' %}">VIEW FACULTY CONSTRAINTS</a></li>
 		</ul>
 	</div>
 	<section>

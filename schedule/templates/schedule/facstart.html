@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>::FACULTY::</title>
+	<meta charset="utf-8">
+	<title>Admin Page</title>
+	<!----bootrap link-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	{% block style %}
+     <!---font awesome icons--->
+	{% endblock %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static   'css/sheet1.css' %}">
+ 
+</head>
+<body style="  
+  background-image: linear-gradient(to right, 	rgb(118, 219, 209,0.1),	rgb(118, 219, 209,1));">
+
+
+      <div class="menubar">
+	<ul>
+		<li><a href="{% url 'timetable2' %}">VIEW TIMETABLE</a></li>
+		<li><a href="{% url 'home' %}">LOGOUT</a></li>
+	</ul>
+	</div>
+	{% include 'schedule/messages.html' %}
+	<h2>WELCOME {{ data.fname }}</h2>
+	<br>
+	<a href="{% url 'timetable2' %}" <button class="btn btn-info" >TIMETABLE</button></a>
+	<br>
+	<a href="{% url 'request' %}" <button class="btn btn-dark" >PUT&nbsp;A&nbsp;REQUEST</button></a>
+	
+	<section>
+
+		{% block content %}
+		{% endblock content %}
+	</section>
+</body>
+</html>

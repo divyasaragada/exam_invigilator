@@ -1,46 +1,38 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-  <title>faculty constraints</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-     <!---font awesome icons--->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-  <link rel="stylesheet" type="text/css" href="{% static   'css/email.css' %}">
-      
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-</head>
-<body>
+{% extends 'schedule/adminstart.html' %}
+{% block content %}
 <center>
-    <br><br><br><br><br>
+   <br><br><br>
     <div class="title">
       <h1>FACULTY CONSTRAINTS</h1>
     </div>
 </center>
-  <form action="{% url 'faccons' %}" method="POST">
-    {% csrf_token %}
-    <br><br><br>
-<table id="fac-request">
+    <br>
+<table class="mytable">
   <tr class="header">
-    <th style="width: 40%;">FACULTY NAME</th>
-    <th style="width: 50%;">REQUEST</th>
+    <th>FACULTY NAME</th>
+    <th>NOT&nbsp;AVAILABLE&nbsp;ON:</th>
+    <th>Delete</th>
   </tr>
   <tbody>
     {% for i in data %} 
     <tr>
-      <td data-column="FACULTY NAME">{{i.fname}}</td>
-      <td data-column="status">
-        <label class="calender">NOT&nbsp;AVAILABLE&nbsp;ON:</label> 
+      <td data-column="FACULTY NAME">{{i.cname}}</td>
+      <td >
+        <label >{{i.cdate}}</label> 
       </td>
-    </tr>
-    {% endfor %}
+    
+   
+    <td><a href="{% url 'delet' i.id  %}"><button class="btn btn-danger" >DELETE</button></a></td>
+   {% endfor %}
+   </tr>
   </tbody>
+
 </table> 
 </form>
 </div>
 </div>
 </div>
-</body>
-</html>
+<center>
+ <a href="{% url 'timetable' %}" <button class="btn btn-info" >TIMETABLE</button></a>
+ </center>
+{% endblock content %}

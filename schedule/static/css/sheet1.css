@@ -1,0 +1,60 @@
+.menubar{
+	background-color:#132743;
+    height: 65px;
+	text-align: right;
+}
+.menubar ul{
+	display: inline-flex;
+	list-style: none;
+	color: #f9fcfb;
+}
+.menubar ul li{
+	margin: 7px;
+	padding: 7px;
+	font-size: 18px;
+
+}
+.menubar ul li a:hover{
+	color: #39dc79;
+}
+.mytable { 
+	width: 700px; 
+	border-collapse: collapse; 
+	margin:50px auto;
+	margin-top: 0px;
+	}
+
+/* Zebra striping */
+tr:nth-of-type(odd) { 
+	background: #eee; 
+	}
+	tr:nth-of-type(even) { 
+	background: #ffff; 
+	}
+
+th { 
+	background: #3498db; 
+	color: white; 
+	font-weight: bold; 
+	}
+
+td, th { 
+	padding: 10px; 
+	border: 1px solid #ccc; 
+	text-align: left; 
+	font-size: 18px;
+	width:100%;
+	}
+
+
+body{
+
+  /*background-image: linear-gradient(to right, 	rgb(118, 219, 209,0.1),	rgb(118, 219, 209,1))*/
+	font-family: 'Source Serif Pro', serif;
+}
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+}
