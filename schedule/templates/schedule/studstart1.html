@@ -1,0 +1,10 @@
+{% extends 'schedule/studstart.html' %}
+{% block content %}
+<br>
+<h2>WELCOME {{ data.student_name }}</h2>
+	<h2>email: {{ data.stu_email }}</h2>
+	<br>
+	<center>
+	<a href="{% url 'timetable3' %}" <button class="btn btn-light btn-lg" >TIMETABLE</button></a>
+	</center>
+{% endblock content %}

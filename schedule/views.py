@@ -3,11 +3,20 @@ from django.contrib import messages
 from schedule.forms import tt1
 
 from django.http import HttpResponse 
-from schedule.models import faculty,room,exam,student,tt,adminlogin,conduct,constraints
+from schedule.models import faculty,room,exam,student,tt,adminlogin,conduct,constraints,feed
 
 def home(request):
 	
 	return render(request,'schedule/home.html')
+def feedback(request):
+	if request.method=="POST":
+		name=request.POST['name']
+		email=request.POST['email']
+		cc=request.POST['cc']
+		feed.objects.create(name=name,email=email,feedback=cc)
+		return render(request,'schedule/home.html')
+
+	return render(request,'schedule/feedback.html')
 
 def admin1(request):
 	if request.method=="POST":
@@ -54,8 +63,8 @@ def stud(request):
 		try:
 			data=student.objects.get(student_name=uname,rollno=rno)
 			if data:
-				messages.success(request,"logged in successfully!!..")
-				return render(request,'schedule/student.html')
+				
+				return render(request,'schedule/studstart1.html',{'data':data})
 		except Exception:
 			#return HttpResponse("please enter correct details...!!!")
 
@@ -82,14 +91,17 @@ def adminpage(request):
 	d=exam.objects.all()
 	if request.method=='POST':
 		exid=request.POST['id']
-
 		try:
 			d1=exam.objects.get(id=exid)
 			if d1:
-				data3=room.objects.filter(room_status='y')
-				s=conduct.objects.filter(ex=d1).values('fna1')
-				dy=faculty.objects.filter(faculty_status='y').exclude(fname__in=s)
-				return render(request,'schedule/assignfac.html',{'x':d1,'y':dy,'z':data3})
+				d1=exam.objects.get(id=exid)
+				s1=conduct.objects.filter(ex=d1).values('fna1')
+				s2=conduct.objects.filter(ex=d1).values('room')
+				dy=faculty.objects.filter(faculty_status='y').exclude(fname__in=s1)
+				data3=room.objects.filter(room_status='y').exclude(roomno__in=s2)
+				s3=conduct.objects.filter(ex=d1).values('fna2')
+				dz=dy.exclude(fname__in=s3)
+				return render(request,'schedule/assignfac.html',{'x':d1,'y':dz,'z':data3})
 		except Exception:
 			messages.warning(request,'Please provide valid exam ID..or go to create exam for new exam..!')
 			
@@ -139,7 +151,8 @@ def assignfac(request,exid):
 		r=room.objects.get(roomno=ro)
 		x=faculty.objects.get(fname=fname)
 		try:
-			data=conduct.objects.create(fna1=x,ex=exobj,fna2=f,room=r,semester=sem,dept=dept,subject=sub)
+			if x.fname!=f:
+				data=conduct.objects.create(fna1=x,ex=exobj,fna2=f,room=r,semester=sem,dept=dept,subject=sub)
 			if data:
 				d1=exam.objects.get(id=exid)
 				s1=conduct.objects.filter(ex=d1).values('fna1')
@@ -150,7 +163,7 @@ def assignfac(request,exid):
 				dz=dy.exclude(fname__in=s3)
 				return render(request,'schedule/assignfac.html',{'x':d1,'y':dz,'z':data3})
 		except Exception:
-			messages.info(request,'Please enter all the valid details!!!.......')
+			messages.warning(request,'Please enter  valid details!!!.......')
 			d=exam.objects.all()
 			return render(request,'schedule/adminpage.html',{'data':d})
 	
@@ -165,10 +178,10 @@ def assignfac(request,exid):
 	return render(request,'schedule/assignfac.html',{'x':d1,'y':dz,'z':data3})
 
 def facstatus(request):
-	x=tt.objects.filter(branch='CSE')
-	y=tt.objects.filter(branch='ECE')
-	z=tt.objects.filter(branch='IT')
-	w=tt.objects.filter(branch='EEE')
+	x=tt.objects.filter(Branch='CSE')
+	y=tt.objects.filter(Branch='IT')
+	z=tt.objects.filter(Branch='ECE')
+	w=tt.objects.filter(Branch='EEE')
 
 	if request.method=="POST":
 		i=request.POST['id']
@@ -221,7 +234,7 @@ def addroom(request):
 			data=room.objects.create(roomno=fname,roomcapacity=fid,room_status=st)
 			return render(request,'schedule/addroom.html')
 		except Exception:
-			messages.warning(request,'Please enter all details!!!.......')
+			messages.warning(request,'Please enter valid details!!!.......')
 			return render(request,'schedule/addroom.html')
 	return render(request,'schedule/addroom.html')
 def update(request,cid):
@@ -263,35 +276,47 @@ def update(request,cid):
 
 def facstart(request):
 	return render(request,'schedule/facstart.html')
+def studstart1(request):
+	return render(request,'schedule/studstart1.html')
 
 def timetable2(request):
 	data=conduct.objects.select_related('ex','fna1','room').all()
 	return render(request,'schedule/timetable2.html',{'data':data})
+def timetable3(request):
+	data=conduct.objects.select_related('ex','fna1','room').all()
+	return render(request,'schedule/timetable3.html',{'data':data})
 	
 def request(request):
 
 	if request.method=="POST":
 		d=request.POST['date']
 		i=request.POST['id']
+		s1=conduct.objects.filter(ex__exam_date=d).values('fna1')
+		s2=conduct.objects.filter(ex__exam_date=d).values('fna2')
+		f1=faculty.objects.filter(fname__in=s1)
+		f2=faculty.objects.filter(fname__in=s2)
+		data=faculty.objects.get(faculty_id=i)
+		k=0
+		for i in f1:
+			if data.fname==i.fname:
+				k=1
+		for i in f2:
+			if data.fname==i.fname:
+				k=2
+		if k==1 or k==2:
+			constraints.objects.create(cname=data.fname,cdate=d)
+			messages.success(request,"REQUEST SENT SUCCESSFULLY..")	
+			return render(request,'schedule/request.html')
+		else:
+			messages.info(request,"No invigilation on this date")
+			data=conduct.objects.select_related('ex','fna1','room').all()
+			return render(request,'schedule/timetable2.html',{'data':data})
 
-		try:
-			s1=conduct.objects.filter(ex__exam_date=d).values('fna1')
-			s2=conduct.objects.filter(ex__exam_date=d).values('fna2')
-			f1=faculty.objects.get(fname__in=s1)
-			f2=faculty.objects.get(fname__in=s2)
-			data=faculty.objects.get(faculty_id=i)
-
-			if data.fname==f1.fname or data.fname==f2.fname:
-				constraints.objects.create(cname=data.fname,cdate=d)
-				messages.success(request,"request sent successfully..")	
-				return render(request,'schedule/request.html')
-			else:
-				data=conduct.objects.select_related('ex','fna1','room').all()
-				messages.info(request,"No invigilation on this date")
-				return render(request,'schedule/timetable2.html',{'data':data})
-		except Exception:
-			messages.warning(request,"please enter your id correctly")
-			return render(request,'schedule/facstart.html')
+		#try:
+			
+		# except Exception:
+		# 	messages.warning(request,"please enter your id correctly")
+		# 	return render(request,'schedule/facstart.html')
 	return render(request,'schedule/request.html')
 def facconstraints(request):
 	data=constraints.objects.all()
@@ -313,13 +338,13 @@ def addtt(req):
 	return render(req,'schedule/addtt.html',{'form':form})
 def showtt(req,name):
 	try:
-		d=tt.objects.get(bname=name)
+		d=tt.objects.get(Section=name)
 		return render(req,'schedule/showtt.html',{'info':d})
 	except Exception:
 		messages.warning(req,'Looks like there is no timetable with this name.')
 		return render(req,'schedule/addtt.html')
 def deltt(req,name):
-	d=tt.objects.get(bname=name)
+	d=tt.objects.get(Section=name)
 	d.delete()
 	form=tt1()
 	return render(req,'schedule/addtt.html',{'form':form})

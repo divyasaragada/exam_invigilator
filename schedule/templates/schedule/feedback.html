@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <title>Feedback Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  </head>
+  <body class="bg-light">
+    <div class="container">
+  <div class="py-5 text-center">
+    <h2>Feedback form</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-8 order-md-1">
+      <form  action="{% url 'feedback' %}"  method="POST" >
+        {% csrf_token %}
+       
+            <label>Name</label><br>
+            <input type="text"  name="name" placeholder="" >
+<br><br>
+
+        
+          <label >Email </label><br>
+          <input type="email"  size="60" name="email" placeholder="you@example.com">
+        
+<br><br>
+        
+            <label for="cc-name">Feedback</label><br>
+            <textarea name="cc" rows="8" cols="80"placeholder="" required=""></textarea>
+          
+        <hr class="md-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Submit My Feedback</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+
+</body>
+</html>

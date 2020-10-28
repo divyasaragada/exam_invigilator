@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>::FACULTY::</title>
+	<title>::STUDENT::</title>
 	<meta charset="utf-8">
 	
 	<!----bootrap link-->
@@ -15,24 +15,17 @@
  
 </head>
 <body style="  
-  background-image: linear-gradient(to right, 	rgb(118, 219, 209,0.1),	rgb(118, 219, 209,1));">
+  background-image: linear-gradient(to right, 	rgb(180, 139, 90,0.1),	rgb(118, 219, 209,1));">
 
 
       <div class="menubar">
-      	
 	<ul>
-		<li><a href="{% url 'timetable2' %}">VIEW TIMETABLE</a></li>
 		<li><a href="{% url 'home' %}">LOGOUT</a></li>
 	</ul>
 	</div>
 	{% include 'schedule/messages.html' %}
-	<h2>WELCOME {{ data.fname }}</h2>
-	<br>
-	<center>
-	<a href="{% url 'timetable2' %}" <button class="btn btn-light btn-lg" >TIMETABLE</button></a>
-	&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="{% url 'request' %}" <button class="btn btn-dark btn-lg" >PUT&nbsp;A&nbsp;REQUEST</button></a>
-	</center>
+	
+	
 	<section>
 
 		{% block content %}

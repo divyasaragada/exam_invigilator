@@ -4,7 +4,7 @@
 <table class="mytable">
   <thead>
     <tr>
-      <th>EXAMid</th>
+      <th>EXAM_Id</th>
      <th>EXAM__DATE</th>
      <th>TIME</th>
      <th>Invigilator&nbsp;1</th>
@@ -21,7 +21,7 @@
   <tbody>
     {% for i in data %} 
     <tr>
-      <td data-column="EXAMid">{{ i.ex.id}}</td>
+      <td data-column="EXAM_Id">{{ i.ex.id}}</td>
       <td data-column="EXAM__DATE">{{ i.ex.exam_date }}</td>
       <td data-column="TIME">{{ i.ex.exam_time }}</td>
       <td data-column="Invigilator&nbsp;1">{{ i.fna1.fname }}</td>

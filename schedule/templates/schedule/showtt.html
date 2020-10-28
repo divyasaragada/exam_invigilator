@@ -5,12 +5,12 @@
   <div class=" col-md-12">
    <div class="row d-flex justify-content-between">   
    <div class="col-sm-3 mt-3">
-    <a href="#"><img src="/static/images/{{info.btt}} " style="width:750px;height:550px" ></a>
+    <a href="#"><img src="/static/images/{{ info.Schedule }} " style="width:750px;height:500px" ></a>
 <br>
-    <label class="text-primary" >SECTION &nbsp;NAME: &nbsp;{{info.bname}}</label>
-    <br>
+    <label class="text-primary" >SECTION &nbsp;NAME: &nbsp;{{info.Section}}</label>
+    <br><br>
     <a href="{% url 'facstatus' %}" class="btn btn-info">Goback</a> &nbsp;&nbsp;
-    <a href="{% url 'deltt' info.bname %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'deltt' info.Section %}" class="btn btn-danger">Delete</a>
   </div>
 
  </div>

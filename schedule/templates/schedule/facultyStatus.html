@@ -10,10 +10,8 @@
 {%  block content %}
 <br>
 <div class="search-btn">
-  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
   <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for faculty name..">
-
   <button style="font-size:25px;border-color:orange;">
     <i class="fa fa-search"></i>
   </button>
@@ -56,33 +54,33 @@
 
 <div class="dropdown">
   <ul>
-    <li><a href="#">TIMETABLE</a>
+    <li><a href="#">SCHEDULES</a>
       <ul>
         <li><a href="#">CSE</a>
           <ul>
             {% for i in x %}
-            <li><a href="{% url 'showtt' i.bname%}">{{ i.bname }}</a></li>
+            <li><a href="{% url 'showtt' i.Section %}">{{ i.Section  }}</a></li>
             {% endfor %}
 
           </ul>
         </li>
         <li><a href="#">IT</a>
           <ul>{% for i in y %}
-            <li><a href="{% url 'showtt' i.bname%}">{{ i.bname }}</a></li>
+            <li><a href="{% url 'showtt' i.Section %}">{{ i.Section  }}</a></li>
             {% endfor %}
           </ul>
         </li>
         <li><a href="#">ECE</a>
           <ul>
             {% for i in z %}
-            <li><a href="{% url 'showtt' i.bname%}">{{ i.bname }}</a></li>
+            <li><a href="{% url 'showtt' i.Section %}">{{ i.Section  }}</a></li>
             {% endfor %}
           </ul>
         </li>
         <li><a href="#">EEE</a>
           <ul>
             {% for i in w %}
-            <li><a href="{% url 'showtt' i.bname%}">{{ i.bname }}</a></li>
+            <li><a href="{% url 'showtt' i.Section %}">{{ i.Section  }}</a></li>
             {% endfor %}
           </ul>
         </li>

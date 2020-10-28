@@ -33,7 +33,7 @@ class conduct(models.Model):
 	ex=models.ForeignKey(exam,on_delete=models.CASCADE)
 	room=models.ForeignKey(room, on_delete=models.CASCADE)
 
-	
+
 	semester=models.CharField(max_length=10,choices=semesters)
 	dept=models.CharField(max_length=3,choices=depts)	
 	subject=models.CharField(max_length=50,default='none',null=False)
@@ -57,9 +57,15 @@ class constraints(models.Model):
 	cname=models.CharField(max_length=50,null=False)
 	cdate=models.DateField(null=False)
 class tt(models.Model):
-	btt=models.ImageField(default='null')
-	bname=models.CharField(max_length=50,null='False')
-	branch=models.CharField(max_length=5,default='CSE')
+	Schedule=models.ImageField(default='null')
+	Section=models.CharField(max_length=50,null='False')
+	Branch=models.CharField(max_length=5,default='CSE')
+class feed(models.Model):
+	name=models.CharField(max_length=50,null=False)
+	email=models.EmailField(null=True)
+	feedback=models.CharField(max_length=1000)
+class head(models.Model):
+	heading=models.CharField(max_length=1000)
 
 	
 

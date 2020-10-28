@@ -20,6 +20,7 @@ from schedule import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/',views.home,name='home'),
+    path('feedback/',views.feedback,name='feedback'),
     path('timetable/',views.timetable,name='timetable'),
     path('admin1/',views.admin1,name='admin1'),
     path('fac/',views.fac,name='fac'),
@@ -35,6 +36,9 @@ urlpatterns = [
     path('update/<int:cid>',views.update,name="update"),
     path('dele/<int:exid>/',views.dele,name="dele"),
     path('timetable2/',views.timetable2,name='timetable2'),
+    path('timetable3/',views.timetable3,name='timetable3'),
+    
+
     path('request/',views.request,name='request'),
     path('facstart/',views.facstart,name='facstart'),
     path('facconstraints',views.facconstraints,name='facconstraints'),
