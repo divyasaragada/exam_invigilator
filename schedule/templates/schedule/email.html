@@ -1,0 +1,33 @@
+{% extends 'schedule/adminstart.html' %}
+{% block content %}
+<br><br><br>
+	<div  class="row">
+    <div class="col-sm-3"></div>
+  
+    <div class="col-md-6">
+     <div class="card">
+    <div class="card-header text-center text-info " >SEND&nbsp;EMAIL</div>
+	<form action="{% url 'semail' %}" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+     <div class="card-body text-center">
+     <label>To&nbsp;Mail:</label>
+     <input type="email" name="email" required>
+     <br>
+      <label>Subject:</label>
+    <input type="text" name="sub" required>
+    <br>
+  
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+    <label>File:</label>
+    <input type="file" name="file" required>
+   
+</div>
+<div class="card-footer text-center">
+	 <button class="btn btn-success">SEND</button>
+   <button class="btn btn-success">CANCEL</button>
+	</div>
+</form>
+</div>
+</div>
+</div>
+    {% endblock content %}
