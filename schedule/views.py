@@ -6,7 +6,7 @@ from exam_invigilator import settings
 from django.core.mail import send_mail,EmailMessage
 
 from django.http import HttpResponse 
-from schedule.models import faculty,room,exam,student,tt,adminlogin,conduct,constraints,feed
+from schedule.models import faculty,room,exam,student,tt,adminlogin,conduct,constraints,feed,head
 
 def home(request):
 	
@@ -118,6 +118,7 @@ def adminpage(request):
 
 def addexam(request):
 	data=exam.objects.all()
+	hx=head.objects.first()
 	if request.method=='POST':
 		i=request.POST['id']
 		date=request.POST['date']
@@ -126,14 +127,14 @@ def addexam(request):
 			data=exam.objects.create(id=i,exam_date=date,exam_time=time)
 			data=exam.objects.all()
 
-			return render(request,'schedule/addexam.html',{'data':data})
+			return render(request,'schedule/addexam.html',{'data':data,'data1':hx})
 	
 		except Exception:
 			data=exam.objects.all()
 			messages.warning(request,'Please enter valid details!!!.......')
-			return render(request,'schedule/addexam.html',{'data':data})
+			return render(request,'schedule/addexam.html',{'data':data,'data1':hx})
 		
-	return render(request,'schedule/addexam.html',{'data':data})
+	return render(request,'schedule/addexam.html',{'data':data,'data1':hx})
 
 
 def dele(request,exid):
@@ -286,10 +287,17 @@ def studstart1(request):
 
 def timetable2(request):
 	data=conduct.objects.select_related('ex','fna1','room').all()
-	return render(request,'schedule/timetable2.html',{'data':data})
+	hx=head.objects.first()
+	return render(request,'schedule/timetable2.html',{'data':data,'h':hx})
 def timetable3(request):
 	data=conduct.objects.select_related('ex','fna1','room').all()
-	return render(request,'schedule/timetable3.html',{'data':data})
+	hx=head.objects.first()
+	return render(request,'schedule/timetable3.html',{'data':data,'h':hx})
+def timetable4(request):
+	data=conduct.objects.select_related('ex','fna1','room').all()
+	hx=head.objects.first()
+	return render(request,'schedule/timetable4.html',{'data':data,'h':hx})
+
 	
 def request(request):
 
@@ -313,7 +321,7 @@ def request(request):
 			messages.success(request,"REQUEST SENT SUCCESSFULLY..")	
 			return render(request,'schedule/request.html')
 		else:
-			messages.info(request,"No invigilation on this date")
+			messages.warning(request,"No invigilation on this date")
 			data=conduct.objects.select_related('ex','fna1','room').all()
 			return render(request,'schedule/timetable2.html',{'data':data})
 
@@ -373,14 +381,22 @@ def send_email(request):
 		sender=settings.EMAIL_HOST_USER
 		
 
-
-		
-		
 		email=EmailMessage(sub,body,sender,l)
 		email.content_subtype='html'
 		email.attach(file.name,file.read(),file.content_type)
 		email.send()
+
 		messages.success(request,"MAIL SENT SUCCESSFULLY")
 		return render(request,'schedule/email.html',{'data':l})
 
 	return render(request,'schedule/email.html',{'data':l})
+def head1(request):
+	data1=head.objects.first()
+	data=exam.objects.all()
+	if request.method=="POST":
+		heading=request.POST['heading']
+		data1.heading=heading
+		data1.save()
+		return render(request,'schedule/addexam.html',{'data':data,'data1':data1})
+	return render(request,'schedule/addexam.html',{'data':data,'data1':data1})
+	

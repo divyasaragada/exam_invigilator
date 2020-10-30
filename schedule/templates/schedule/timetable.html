@@ -13,11 +13,12 @@
      <th>SUBJECT</th>
      <th>DEPARTMENT</th>
      <th>SEMESTER</th>
-     <th>EDIT</th>
-     <th>DELETE</th>
-      
+      <th>EDIT</th>
+      <th>DELETE</th>
     </tr>
   </thead>
+
+ 
   <tbody>
     {% for i in data %} 
     <tr>
@@ -30,15 +31,17 @@
       <td data-column="SUBJECT">{{ i.subject }}</td>
       <td data-column="DEPARTMENT">{{ i.dept }}</td>
       <td data-column="SEMESTER">{{ i.semester }}</td>
-      <td data-column="EDIT"><a href="{% url 'update' i.id %}"><i class="fa fa-edit" style="font-size: 25px;color:#0d7377" ></i></a></td>
-      <td data-column="DELETE"><a href="{% url 'delete' i.id %}"><i class="fa fa-trash" style="font-size:25px;color:#ff414d"></a></i></td>
       
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+      <td data-column="EDIT"><a href="{% url 'update' i.id %}"><i class="fa fa-edit" style="font-size: 25px;color:#0d7377" ></i></a></td>
+      <td data-column="DELETE"><a href="{% url 'delete' i.id %}"><i class="fa fa-trash"  style="font-size:25px;color:#ff414d"></a></i></td>
+      </tr>
+        {% endfor %}
+    </tbody>
+   
+     </table>
+  
 <center>
-<a href="{% url 'timetable' %}" <button class="btn btn-secondary" >DOWNLOAD</button></a>&nbsp;&nbsp;&nbsp;
+<a href="{% url 'timetable4' %}" <button class="btn btn-secondary" >PREVIEW&nbsp;TO&nbsp;DOWNLOAD</button></a>&nbsp;&nbsp;&nbsp;
 <a href="{% url 'send_email' %}" <button class="btn btn-success" >SEND&nbsp;EMAIL</button></a>
 </center>
 {% endblock content %}

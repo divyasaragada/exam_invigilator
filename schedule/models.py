@@ -65,7 +65,7 @@ class feed(models.Model):
 	email=models.EmailField(null=True)
 	feedback=models.CharField(max_length=1000)
 class head(models.Model):
-	heading=models.CharField(max_length=1000)
+	heading=models.CharField(max_length=1000,default='EXAM TIMETABLE')
 
 	
 

@@ -41,7 +41,7 @@ urlpatterns = [
 
     path('timetable2/',views.timetable2,name='timetable2'),
     path('timetable3/',views.timetable3,name='timetable3'),
-    
+    path('timetable4/',views.timetable4,name='timetable4'),
 
     path('request/',views.request,name='request'),
     path('facstart/',views.facstart,name='facstart'),
@@ -53,5 +53,6 @@ urlpatterns = [
      path('showtt/<str:name>/',views.showtt,name="showtt"),
 
      path('send_email/',views.send_email,name='send_email'),
+     path('head1/',views.head1,name='head1'),
 ]
 

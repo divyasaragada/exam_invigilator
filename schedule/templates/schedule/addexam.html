@@ -9,7 +9,11 @@
     <div class="col-md-8">
      <div class="card">
     <div class="card-header text-center text-info " >CREATE AN EXAM</div>
-	
+	   <form action="{% url 'head1' %}" method="POST">
+      {% csrf_token %}<center>
+    <input type="text" size="40" name="heading" value="{{ data1.heading }}">&nbsp;&nbsp;&nbsp; <button class="btn btn-success"> UPDATE</button></center>
+     
+      </form>
    
 <br>
 <table class="mytable">
@@ -18,7 +22,7 @@
       <th>EXAMID</th>
       <th>EXAM_DATE</th>
       <th>EXAM_TIME</th>
-      <th>ADD</th>
+      <th>CHANGE </th>
     </tr>
 
     {% for i in data %}

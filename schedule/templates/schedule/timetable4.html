@@ -1,15 +1,15 @@
-{% extends 'schedule/facstart.html' %}
+{% extends 'schedule/adminstart.html' %}
 {% block content %}
 <br>
 <div id="tab">
 <table class="mytable">
   <center>
-    <h3 >{{ h.heading }} </h3>
+    <h3>{{ h.heading }}</h3>
   </center>
   <thead>
     <tr>
      <th>EXAM&nbsp;&nbsp;DATE</th>
-     <th>EXAM&nbsp;&nbsp;TIME</th>
+     <th>TIME&nbsp;&nbsp;</th>
      <th>Invigilator&nbsp;1</th>
      <th>Invigilator&nbsp;2</th>
      <th>ROOMNO</th>
@@ -37,6 +37,7 @@
 </table>
 </div>
 <center>
+  
   <button  class="btn btn-success" onclick="myApp.printTable()">DOWNLOAD</button>
 </center>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
