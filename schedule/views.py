@@ -2,12 +2,17 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from schedule.forms import tt1
 
+from exam_invigilator import settings
+from django.core.mail import send_mail,EmailMessage
+
 from django.http import HttpResponse 
 from schedule.models import faculty,room,exam,student,tt,adminlogin,conduct,constraints,feed
 
 def home(request):
 	
 	return render(request,'schedule/home.html')
+def first(request):
+	return render(request,'schedule/first.html')
 def feedback(request):
 	if request.method=="POST":
 		name=request.POST['name']
@@ -348,3 +353,34 @@ def deltt(req,name):
 	d.delete()
 	form=tt1()
 	return render(req,'schedule/addtt.html',{'form':form})
+
+def send_email(request):
+	data1=conduct.objects.select_related('ex','fna1','room').values('fna1')
+	data2=conduct.objects.select_related('ex','fna1','room').values('fna2')
+	f1=faculty.objects.filter(fname__in=data1)
+	f2=faculty.objects.filter(fname__in=data2)
+	l=[]
+	for i in f1:
+		l.append(i.email)
+	for i in f2:
+		l.append(i.email)
+	if request.method=="POST":
+		
+		sub=request.POST['sub']
+		body=request.POST['message']
+		file=request.FILES['file']
+
+		sender=settings.EMAIL_HOST_USER
+		
+
+
+		
+		
+		email=EmailMessage(sub,body,sender,l)
+		email.content_subtype='html'
+		email.attach(file.name,file.read(),file.content_type)
+		email.send()
+		messages.success(request,"MAIL SENT SUCCESSFULLY")
+		return render(request,'schedule/email.html',{'data':l})
+
+	return render(request,'schedule/email.html',{'data':l})

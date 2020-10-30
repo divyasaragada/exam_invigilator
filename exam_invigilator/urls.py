@@ -20,8 +20,10 @@ from schedule import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/',views.home,name='home'),
+    path('first/',views.first,name='first'),
     path('feedback/',views.feedback,name='feedback'),
     path('timetable/',views.timetable,name='timetable'),
+
     path('admin1/',views.admin1,name='admin1'),
     path('fac/',views.fac,name='fac'),
     path('stud/',views.stud,name='stud'),
@@ -32,9 +34,11 @@ urlpatterns = [
     path('assignfac/<int:exid>/',views.assignfac,name='assignfac'),
     path('addfac/',views.addfac,name='addfac'),
     path('addroom/',views.addroom,name='addroom'),
+
     path('delete/<int:cid>/',views.delete,name='delete'),
     path('update/<int:cid>',views.update,name="update"),
     path('dele/<int:exid>/',views.dele,name="dele"),
+
     path('timetable2/',views.timetable2,name='timetable2'),
     path('timetable3/',views.timetable3,name='timetable3'),
     
@@ -46,7 +50,8 @@ urlpatterns = [
 
      path('addtt',views.addtt,name="addtt"),
      path('deltt/<str:name>',views.deltt,name="deltt"),
+     path('showtt/<str:name>/',views.showtt,name="showtt"),
 
-    path('showtt/<str:name>/',views.showtt,name="showtt"),
+     path('send_email/',views.send_email,name='send_email'),
 ]
 
