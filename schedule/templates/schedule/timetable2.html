@@ -1,7 +1,11 @@
 {% extends 'schedule/facstart.html' %}
 {% block content %}
 <br>
-<table id='tblCustomers' class="mytable">
+<div id="tab">
+<table class="mytable">
+  <center>
+    <h3 id="heading">EXAM TIMETABLE</h3>
+  </center>
   <thead>
     <tr>
      <th>EXAM&nbsp;&nbsp;DATE</th>
@@ -31,26 +35,51 @@
     {% endfor %}
   </tbody>
 </table>
+</div>
 <center>
-<button id="btnExport" class="btn btn-success" onclick="Export()">DOWNLOAD</button>
+  <!--<button id="btnExport" class="btn btn-success" onclick="Export()">DOWNLOAD</button>-->
+  <button type="button" class="btn btn-success" onclick="printTable()">DOWNLOAD</button>
 </center>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+  <script>
+      var myApp = new function() {
+        this.printTable = function () {
+            var tab = document.getElementById('tab');
+            var style = "<style>";
+            style = style + "table {width: 100%; font: 17px Calibri;}";
+            style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+            style = style + "padding: 2px 3px; text-align: center;}";
+            style = style + "</style>";
+            var win = window.open('', '', 'height=700,width=700');
+            
+            win.document.write(style);
+            win.document.write(tab.outerHTML);
+            win.document.close();
+            /*win.print();*/
+        }
+    }
+</script>
+
+
+ <!--  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script type="text/javascript">
         function Export() {
-            html2canvas(document.getElementById('tblCustomers'), {
+            html2canvas(document.getElementById('tab'), {
                 onrendered: function (canvas) {
                     var data = canvas.toDataURL();
                     var docDefinition = {
-                        content: [{
+                            content: [{
                             heading:'EXAM TIMETABLE',
                             image: data,
                             width: 500
                         }]
-                    };
+                    }; 
+
                     pdfMake.createPdf(docDefinition).download("Table.pdf");
                 }
             });
         }
     </script>
+  -->
+
 {% endblock content %}
