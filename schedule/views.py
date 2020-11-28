@@ -11,8 +11,10 @@ from schedule.models import faculty,room,exam,student,tt,adminlogin,conduct,cons
 def home(request):
 	
 	return render(request,'schedule/home.html')
+#home page-college image
 def first(request):
 	return render(request,'schedule/first.html')
+#feedback page
 def feedback(request):
 	if request.method=="POST":
 		name=request.POST['name']
@@ -22,7 +24,7 @@ def feedback(request):
 		return render(request,'schedule/home.html')
 
 	return render(request,'schedule/feedback.html')
-
+#adminLogin page--uses username,password
 def admin1(request):
 	if request.method=="POST":
 		uname=request.POST['uname']
@@ -42,7 +44,7 @@ def admin1(request):
 
 	return render(request,'schedule/admin.html')
 
-
+#facultylogin--uses id,email,department
 def fac(request):
 	if request.method=="POST":
 		id1=request.POST['id']
@@ -59,7 +61,7 @@ def fac(request):
 
 
 	return render(request,'schedule/faculty.html')
-
+#studentLogin--uses username,rollno
 def stud(request):
 	if request.method=="POST":
 		uname=request.POST['uname']
@@ -78,12 +80,14 @@ def stud(request):
 			
 
 	return render(request,'schedule/student.html')
-
+#deleting one exam which is already in timetable,cid---exam id in tt
 def delete(request,cid):
 	d=conduct.objects.get(id=cid)
 	d.delete()
 	data=conduct.objects.select_related('ex','fna1','room').all()
 	return render(request,'schedule/timetable.html',{'data':data})
+
+#displaying timetable
 
 def timetable(request):
 	
@@ -91,6 +95,7 @@ def timetable(request):
 	return render(request,'schedule/timetable.html',{'data':data})
 
 from django.contrib.auth.decorators import login_required
+@login_required
 
 def adminpage(request):
 	d=exam.objects.all()
@@ -99,9 +104,12 @@ def adminpage(request):
 		try:
 			d1=exam.objects.get(id=exid)
 			if d1:
+				#redirecting to assignfac page by sending all details of faculty,roomno
 				d1=exam.objects.get(id=exid)
 				s1=conduct.objects.filter(ex=d1).values('fna1')
 				s2=conduct.objects.filter(ex=d1).values('room')
+
+				#excluding faculty who are already assigned to that exam id--fac1,fac2
 				dy=faculty.objects.filter(faculty_status='y').exclude(fname__in=s1)
 				data3=room.objects.filter(room_status='y').exclude(roomno__in=s2)
 				s3=conduct.objects.filter(ex=d1).values('fna2')
@@ -115,7 +123,7 @@ def adminpage(request):
 	return render(request,'schedule/adminpage.html',{'data':d})
 	
 
-
+#To add a new exam with exam id,date,time and aslo heading hx
 def addexam(request):
 	data=exam.objects.all()
 	hx=head.objects.first()
@@ -136,18 +144,18 @@ def addexam(request):
 		
 	return render(request,'schedule/addexam.html',{'data':data,'data1':hx})
 
-
+#deleting exam in create exam page which deletes that date,time,id
 def dele(request,exid):
 	d=exam.objects.get(id=exid)
 	d.delete()
 	data=exam.objects.all()
 	return render(request,'schedule/addexam.html',{'data':data})
       
-
+#faculty assignment
 def assignfac(request,exid):
 	if request.method=="POST":
 		i=exid
-		fname=request.POST['fname']
+		fna=request.POST['fna1']
 		f=request.POST['fna2']
 		ro=request.POST['room']
 		sem=request.POST['sem']
@@ -155,11 +163,13 @@ def assignfac(request,exid):
 		dept=request.POST['dept']
 		exobj=exam.objects.get(id=i)
 		r=room.objects.get(roomno=ro)
-		x=faculty.objects.get(fname=fname)
+		x=faculty.objects.get(fname=fna)
 		try:
+			#if fac1,fac2 are different assign
 			if x.fname!=f:
 				data=conduct.objects.create(fna1=x,ex=exobj,fna2=f,room=r,semester=sem,dept=dept,subject=sub)
 			if data:
+				#redirecting with fresh data(excluding the above assigned faculty to that exam id) to same page.
 				d1=exam.objects.get(id=exid)
 				s1=conduct.objects.filter(ex=d1).values('fna1')
 				s2=conduct.objects.filter(ex=d1).values('room')
@@ -182,8 +192,9 @@ def assignfac(request,exid):
 	s3=conduct.objects.filter(ex=d1).values('fna2')
 	dz=dy.exclude(fname__in=s3)
 	return render(request,'schedule/assignfac.html',{'x':d1,'y':dz,'z':data3})
-
+#update faculty status
 def facstatus(request):
+	#data for schedules
 	x=tt.objects.filter(Branch='CSE')
 	y=tt.objects.filter(Branch='IT')
 	z=tt.objects.filter(Branch='ECE')
@@ -201,6 +212,7 @@ def facstatus(request):
 		return render(request,'schedule/facultyStatus.html',{'data':data,'x':x,'y':y,'z':z,'w':w})
 	data=faculty.objects.all()
 	return render(request,'schedule/facultyStatus.html',{'data':data,'x':x,'y':y,'z':z,'w':w})
+#update rooomstatus
 def roomstatus(request):
 	if request.method=="POST":
 		i=request.POST['id']
@@ -214,7 +226,7 @@ def roomstatus(request):
 		return render(request,'schedule/roomstatus.html',{'data':data})
 	data=room.objects.all()
 	return render(request,'schedule/roomstatus.html',{'data':data})
-
+#add new faculty
 def addfac(request):
 	if request.method=="POST":
 		fname=request.POST['fname']
@@ -230,7 +242,7 @@ def addfac(request):
 			return render(request,'schedule/addfac.html')
 	return render(request,'schedule/addfac.html')
 
-
+#add new room
 def addroom(request):
 	if request.method=="POST":
 		fname=request.POST['rno']
@@ -243,6 +255,7 @@ def addroom(request):
 			messages.warning(request,'Please enter valid details!!!.......')
 			return render(request,'schedule/addroom.html')
 	return render(request,'schedule/addroom.html')
+#update in timetable by clicking edit symbol
 def update(request,cid):
 	data=conduct.objects.get(id=cid)
 	
@@ -279,11 +292,13 @@ def update(request,cid):
 	s3=conduct.objects.filter(ex=d1).values('fna2')
 	dz=dy.exclude(fname__in=s3)
 	return render(request,'schedule/edit.html',{'data':data,'x':d1,'y':dz,'z':data3})
-
+#faculty page after login
 def facstart(request):
 	return render(request,'schedule/facstart.html')
+#student page after login
 def studstart1(request):
 	return render(request,'schedule/studstart1.html')
+#timetables without edit,delete symbols
 
 def timetable2(request):
 	data=conduct.objects.select_related('ex','fna1','room').all()
@@ -298,48 +313,49 @@ def timetable4(request):
 	hx=head.objects.first()
 	return render(request,'schedule/timetable4.html',{'data':data,'h':hx})
 
-	
+#faculty request for admin 
 def request(request):
 
 	if request.method=="POST":
-		d=request.POST['date']
-		i=request.POST['id']
-		s1=conduct.objects.filter(ex__exam_date=d).values('fna1')
-		s2=conduct.objects.filter(ex__exam_date=d).values('fna2')
-		f1=faculty.objects.filter(fname__in=s1)
-		f2=faculty.objects.filter(fname__in=s2)
-		data=faculty.objects.get(faculty_id=i)
-		k=0
-		for i in f1:
-			if data.fname==i.fname:
-				k=1
-		for i in f2:
-			if data.fname==i.fname:
-				k=2
-		if k==1 or k==2:
-			constraints.objects.create(cname=data.fname,cdate=d)
-			messages.success(request,"REQUEST SENT SUCCESSFULLY..")	
-			return render(request,'schedule/request.html')
-		else:
-			messages.warning(request,"No invigilation on this date")
-			data=conduct.objects.select_related('ex','fna1','room').all()
-			return render(request,'schedule/timetable2.html',{'data':data})
-
-		#try:
+		try:
+			d=request.POST['date']
+			i=request.POST['id']
+			s1=conduct.objects.filter(ex__exam_date=d).values('fna1')
+			s2=conduct.objects.filter(ex__exam_date=d).values('fna2')
+			f1=faculty.objects.filter(fname__in=s1)
+			f2=faculty.objects.filter(fname__in=s2)
+			data=faculty.objects.get(faculty_id=i)
+			k=0
 			
-		# except Exception:
-		# 	messages.warning(request,"please enter your id correctly")
-		# 	return render(request,'schedule/facstart.html')
+			for i in f1:
+				if data.fname==i.fname:
+					k=1
+			for i in f2:
+				if data.fname==i.fname:
+					k=2
+			if k==1 or k==2:
+				constraints.objects.create(cname=data.fname,cdate=d)
+				messages.success(request,"REQUEST SENT SUCCESSFULLY..")	
+				return render(request,'schedule/request.html')
+			else:
+				messages.warning(request,"No invigilation on this date")
+				data=conduct.objects.select_related('ex','fna1','room').all()
+				return render(request,'schedule/timetable2.html',{'data':data})
+		except Exception:
+			messages.warning(request,"please enter your details correctly")
+			return render(request,'schedule/facstart.html')
 	return render(request,'schedule/request.html')
+#faculty constraints
 def facconstraints(request):
 	data=constraints.objects.all()
 	return render(request,'schedule/facconstraints.html',{'data':data})
+#deleting faculty constarints
 def delet(request,id):
 	data=constraints.objects.get(id=id)
 	data.delete()
 	data=constraints.objects.all()
 	return render(request,'schedule/facconstraints.html',{'data':data})
-
+#add some schedules
 def addtt(req):
 	form=tt1()
 	if  req.POST:
@@ -349,6 +365,7 @@ def addtt(req):
 			return render(req,'schedule/addtt.html',{'form':form})
 	
 	return render(req,'schedule/addtt.html',{'form':form})
+#show schedules
 def showtt(req,name):
 	try:
 		d=tt.objects.get(Section=name)
@@ -356,11 +373,13 @@ def showtt(req,name):
 	except Exception:
 		messages.warning(req,'Looks like there is no timetable with this name.')
 		return render(req,'schedule/addtt.html')
+#delete schedules
 def deltt(req,name):
 	d=tt.objects.get(Section=name)
 	d.delete()
 	form=tt1()
 	return render(req,'schedule/addtt.html',{'form':form})
+#sending email to faculty
 
 def send_email(request):
 	data1=conduct.objects.select_related('ex','fna1','room').values('fna1')
@@ -390,6 +409,7 @@ def send_email(request):
 		return render(request,'schedule/email.html',{'data':l})
 
 	return render(request,'schedule/email.html',{'data':l})
+#heading
 def head1(request):
 	data1=head.objects.first()
 	data=exam.objects.all()
