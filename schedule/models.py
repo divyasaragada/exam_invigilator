@@ -26,8 +26,6 @@ class conduct(models.Model):
 	semesters = (("1-1","1-1"),("1-2","1-2"),("2-1","2-1"),("2-2","2-2"),("2-1","2-1"),("2-2","2-2"),("3-1","3-1"),("4-2","4-2"))
 	depts=(('it','information technology'),('eee','electrical'),('cse','computer science'),('ece',"electronics and communication"))
 
-	#faculty_id=models.ForeignKey(faculty, on_delete=models.CASCADE)---will do it while dispalying final timetable
-	#fna1=models.CharField(max_length=100,null=False)
 	fna1=models.ForeignKey(faculty,on_delete=models.CASCADE)
 	fna2=models.CharField(max_length=50,null=True)
 	ex=models.ForeignKey(exam,on_delete=models.CASCADE)

@@ -44,7 +44,7 @@ def admin1(request):
 
 	return render(request,'schedule/admin.html')
 
-#facultylogin--uses id,email,department
+#facultylogin--user id,email,department
 def fac(request):
 	if request.method=="POST":
 		id1=request.POST['id']
@@ -95,7 +95,7 @@ def timetable(request):
 	return render(request,'schedule/timetable.html',{'data':data})
 
 from django.contrib.auth.decorators import login_required
-@login_required
+
 
 def adminpage(request):
 	d=exam.objects.all()
@@ -134,6 +134,7 @@ def addexam(request):
 		try:
 			data=exam.objects.create(id=i,exam_date=date,exam_time=time)
 			data=exam.objects.all()
+			hx=head.objects.first()
 
 			return render(request,'schedule/addexam.html',{'data':data,'data1':hx})
 	
@@ -149,7 +150,8 @@ def dele(request,exid):
 	d=exam.objects.get(id=exid)
 	d.delete()
 	data=exam.objects.all()
-	return render(request,'schedule/addexam.html',{'data':data})
+	hx=head.objects.first()
+	return render(request,'schedule/addexam.html',{'data':data,'data1':hx})
       
 #faculty assignment
 def assignfac(request,exid):

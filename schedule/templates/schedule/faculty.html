@@ -4,22 +4,22 @@
 <head>
 	<title>faculty login page</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="{% static   'css/style5.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static   'css/mystyle3.css' %}">
 </head>
 <body>
 	{% include 'schedule/messages.html' %}
 	<div class="loginbox">
-	<img src="/static/images/faculty1.png" class="faculty1">
+	<img src="/static/images/faculty1.png" id="faculty1">
 	<h1>LOGIN HERE</h1>
 	<form action="{% url 'fac' %}" method="POST">
 		{% csrf_token %}
 			<div>
 				<label>ID</label>
-				<input type="varchar" name="id" placeholder="Enter ID">
+				<input type="number" name="id" placeholder="Enter ID">
 			</div>
 			<div class="formbox">
 				<label>EMAIL</label>
-				<input type="varchar" name="email" placeholder="Enter Email as ...@gvpcew.ac.in">
+				<input type="email" name="email" placeholder="Enter Email as ...@gvpcew.ac.in">
 			</div>
 			<div class="formbox">
 				<label>DEPARTMENT</label>

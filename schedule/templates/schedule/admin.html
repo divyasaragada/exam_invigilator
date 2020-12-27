@@ -5,12 +5,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <title>admin login page</title>
-    <link rel="stylesheet" type="text/css" href="{% static   'css/style4.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static   'css/mystyle3.css' %}">
 </head>
     <body>
       {% include 'schedule/messages.html' %}
     <div class="loginbox">
-    <img src="/static/images/admin2.png" class="admin">    
+    <img src="/static/images/admin2.png" id="admin">    
         <h1>LOGIN HERE</h1>
         <form action="{% url 'admin1' %}" method="POST">
             {% csrf_token %}

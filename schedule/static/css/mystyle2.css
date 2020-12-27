@@ -59,7 +59,7 @@ td, th {
 }
 .dropdown ul li{
   background: #ff9999;
-  width: 170px;
+  width: 200px;
   border: 1px solid #fff;
   height: 50px;
   line-height: 50px;
@@ -71,6 +71,7 @@ td, th {
   font-family: big john;
 }
 .dropdown ul li:hover{
+  
   color: #39dc79;
 }
 .dropdown ul ul{
