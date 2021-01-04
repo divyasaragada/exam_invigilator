@@ -36,13 +36,12 @@ th {
 td, th { 
   padding: 6px; 
   border: 1px solid #ccc; 
-  text-align: left; 
+  text-align: center; 
   font-size: 18px;
   width:0%;
   }
 
-
-
+/*
 .dropdown{
   position: absolute;
   top: 250px;
@@ -59,7 +58,7 @@ td, th {
 }
 .dropdown ul li{
   background: #ff9999;
-  width: 200px;
+  width: 170px;
   border: 1px solid #fff;
   height: 50px;
   line-height: 50px;
@@ -71,13 +70,15 @@ td, th {
   font-family: big john;
 }
 .dropdown ul li:hover{
-  
   color: #39dc79;
+
 }
 .dropdown ul ul{
   display: none;
+  
 }
 .dropdown ul li:hover > ul{
+  
   display: block;
 }
 .dropdown ul ul ul{
@@ -85,4 +86,108 @@ td, th {
   top: 0;
   position: absolute;
 }
+*/
+.drop {  
+position: absolute; 
+  
+  top: 250px;
+  right: 260px; 
+    display: block;
+    text-align: center;
+  }
+.drop ul {
+    margin: 0;
+    width: 190px;
+    padding:0;
+    list-style: none;
+  }
+  .nav1 a {
+    display:block; 
+    background: white; 
+    color:green; 
+    text-decoration: none;
+    padding: .8em 1.8em;
+    text-transform: uppercase;
+    font-size: 90%;letter-spacing: 2px;
+    text-shadow: 0 -1px 0 #000;
+    position: relative;
+  }
+  .nav1{  
+    vertical-align: top; 
+    display: inline-block;
+    
+  
+  }
+  .nav1 li{position: relative;}
+  .nav1 > li { 
+    float:left; 
+    border-bottom: 4px #aaa solid; 
+    margin-right: 1px; 
+  } 
+ 
+  
 
+  
+  
+    .nav1 li a:first-child:nth-last-child(2):before { 
+     content:""; 
+     position: absolute; 
+     height:0; 
+     width: 0; 
+     border: 5px solid transparent; 
+     top: 50% ;
+     right:5px;  
+   }
+   
+   
+   
+   
+   
+   /* submenu positioning*/
+.nav1 ul {
+  position: absolute;
+  white-space: nowrap;
+ 
+  z-index: 1;
+  left: -99999em;
+}
+.nav1 > li:hover > ul {
+  left: auto;
+  padding-top: 5px  ;
+  min-width: 100%;
+}
+.nav1 > li li ul {  border-left:1px solid #fff;}
+
+
+.nav1 > li li:hover > ul { 
+ /* margin-left: 1px */
+  left: 100%;
+  top: -1px;
+}
+
+
+
+
+
+
+
+
+
+/* arrow hover styling */
+.nav1 > li > a:first-child:nth-last-child(2):before { 
+  border-top-color: #aaa; 
+}
+.nav1 > li:hover > a:first-child:nth-last-child(2):before {
+  border: 5px solid transparent; 
+  border-bottom-color: orange; 
+  margin-top:-5px
+}
+.nav1 li li > a:first-child:nth-last-child(2):before {  
+  border-left-color: #aaa; 
+  margin-top: -5px
+}
+.nav1 li li:hover > a:first-child:nth-last-child(2):before {
+  border: 5px solid transparent; 
+  border-right-color: orange;
+  right: 10px; 
+}

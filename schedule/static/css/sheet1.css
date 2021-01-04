@@ -41,7 +41,7 @@ th {
 td, th { 
 	padding: 10px; 
 	border: 1px solid #ccc; 
-	text-align: left; 
+	text-align: center; 
 	font-size: 18px;
 	width:100%;
 	}

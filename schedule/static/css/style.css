@@ -1,4 +1,3 @@
-{% load static %}
 
 .nav-item{
 	
@@ -21,8 +20,9 @@ body{
 	background-repeat: no-repeat;  
   background-size: cover;
 	background-color: #ffbb91;
-
+	 
 }
+
 .class1{
 
 	color: #30475e;

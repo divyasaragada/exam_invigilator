@@ -22,7 +22,7 @@ th {
 td, th { 
 	padding: 10px; 
 	border: 1px solid #ccc; 
-	text-align: left; 
+	text-align: center; 
 	font-size: 18px;
 	width:100%;
 	}
@@ -32,6 +32,8 @@ body{
 	background: linear-gradient(to right, rgb(80, 180, 250,0.1), rgb(66, 190, 255,0.8));
  /*background: url('/static/images/image.png');*/
 	font-family: 'Source Serif Pro', serif;
+	
+    
 }
 *{
 	margin: 0;
@@ -40,7 +42,7 @@ body{
 	text-decoration: none;
 }
 .menubar{
-   
+  position: fixed; 
 	background-color:#132743;
     height: 65px;
 	text-align: right;
@@ -187,4 +189,20 @@ label #cancel{
   margin-left: 130px;
   top: 0;
   position: absolute;
+}
+@media only screen and (max-width:800px) {
+  /* For tablets: */
+  .mytable{
+    width: 80%;
+    padding: 0;
+  }
+  .sidebar {
+    width: 100%;
+  }
+}
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .sidebar, .mytable, .dropdown {
+    width: 100%;
+  }
 }

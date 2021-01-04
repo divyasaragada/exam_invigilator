@@ -1,13 +1,26 @@
 {% extends 'schedule/adminstart.html' %}
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<style type="text/css">
+
+.odd{
+    width: 39px;
+    height: 45px;
+    border-style: hidden;   
+    border-radius: 5px;
+    background-color: #33BAFF;
+  }
+
+</style>
+  <!----bootrap link-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
      <!---font awesome icons--->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="{% static   'css/mystyle2.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static   'css/MystylE2.css' %}">  
  
 {% endblock %}
 {%  block content %}
+
 <br>
 <div class="search-btn">
   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -18,34 +31,38 @@
     <i class="fa fa-search"></i>
   </button>
 </div>
-<div  class="row">
+    <div  class="row">
      <div class="col-sm-2"></div>
   
-    <div class="col-md-6">
-     <div class="card">
-    <div class="card-header text-center text-info " >UPDATE ROOM STATUS</div>
+     <div class="col-md-6">
+      <div class="card">
+                 <div class="card-header text-center text-info " >UPDATE ROOM STATUS</div>
   
    
 <br>
 <table id="myTable">
 
     <tr>
-      <th>ROOMNO</th>
+      <th >ROOMNO</th>
       <th>CAPACITY</th>
-      <th>STATUS</th>
-      <th>CHANGE </th>
+      <th >STATUS</th>
+      <th >CHANGE </th>
+      
     </tr>
 
     {% for i in data %}
     <tr>
+
       <form action="{% url 'roomstatus' %}" method="POST">
           {% csrf_token %} 
-           <td>{{ i.roomno }}</td>
-      <td>{{ i.roomcapacity }}
+
+      <td>{{ i.roomno }}</td>
+      <td >{{ i.roomcapacity }}
       <input size="6" style="visibility: hidden;" type="number" name="id" value="{{ i.roomno }}" style="color:blue"></td>
      
-     <td><button class="btn btn-light" style="font-size: 20px">{{i.room_status}}</button></td>
-    <td><button class="btn btn-info">Change</button></td>
+     <td class="xyz"><button class="btn btn-light" style="font-size: 22px;
+     ">{{i.room_status}}</button></td>
+     <td><button class="btn btn-info">Change</button></td>
       </form>
       </td>
       
@@ -60,6 +77,16 @@
        
                                                               
 <script>
+  
+
+ var cells = document.getElementById("myTable").getElementsByTagName("button");
+for (var i = 0; i < cells.length; i++) {
+    if (cells[i].textContent == "y") {
+        cells[i].className = "odd";
+    }
+}
+
+
 function myFunction() {
   // Declare variables
   var input, filter, table, tr, td, i, txtValue;

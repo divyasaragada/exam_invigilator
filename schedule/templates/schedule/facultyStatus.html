@@ -4,13 +4,25 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
      <!---font awesome icons--->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="{% static   'css/mystyle2.css' %}">
+  <style type="text/css">
+.odd{
+    width: 39px;
+    height: 45px;
+    border-style: hidden; 
+    
+    border-radius: 5px;
+    background-color: #33BAFF;
+
+  }
+</style>
+  <link rel="stylesheet" type="text/css" href="{% static   'css/MystylE2.css' %}">
 
 {% endblock %}
 {%  block content %}
 <br>
 <div class="search-btn">
   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+  
   <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for faculty name..">
   <button style="font-size:25px;border-color:orange;">
     <i class="fa fa-search"></i>
@@ -34,12 +46,12 @@
       <form action="{% url 'facstatus' %}" method="POST">
           {% csrf_token %} 
            <td>{{ i.fname }}</td>
-      <td>{{ i.faculty_id }}
-      <input size="6" style="visibility: hidden;" type="number" name="id" value="{{ i.faculty_id }}" style="color:blue"></td>
+           <td>{{ i.faculty_id }}
+           <input size="6" style="visibility: hidden;" type="number" name="id" value="{{ i.faculty_id }}" style="color:blue"></td>
      
-     <td><button class="btn btn-light" style="font-size: 20px">{{i.faculty_status}}</button></td>
-    <td><button class="btn btn-info">Change</button></td>
-      </form>
+          <td><button class="btn btn-light" style="font-size: 20px">{{i.faculty_status}}</button></td>
+          <td><button class="btn btn-info">Change</button></td>
+     </form>
       </td>
       
     </tr>
@@ -52,8 +64,8 @@
 
        
 
-<div class="dropdown">
-  <ul>
+<div class="drop">
+  <ul class="nav1">
     <li><a href="#">SCHEDULES</a>
       <ul>
         <li><a href="#">CSE</a>
@@ -90,6 +102,13 @@
 </div>
   
 <script>
+	  var cells = document.getElementById("myTable").getElementsByTagName("button");
+for (var i = 0; i < cells.length; i++) {
+    if (cells[i].textContent == "y") {
+        cells[i].className = "odd";
+    }
+}
+
 function myFunction() {
   // Declare variables
   var input, filter, table, tr, td, i, txtValue;
