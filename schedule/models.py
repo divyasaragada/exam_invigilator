@@ -55,9 +55,10 @@ class constraints(models.Model):
 	cname=models.CharField(max_length=50,null=False)
 	cdate=models.DateField(null=False)
 class tt(models.Model):
+	depts=(('cse','CSE'),('it','IT'),('eee','EEE'),('ece',"ECE"))
 	Schedule=models.ImageField(default='null')
 	Section=models.CharField(max_length=50,null='False')
-	Branch=models.CharField(max_length=5,default='CSE')
+	Branch=models.CharField(max_length=5,choices=depts)
 class feed(models.Model):
 	name=models.CharField(max_length=50,null=False)
 	email=models.EmailField(null=True)

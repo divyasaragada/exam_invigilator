@@ -5,26 +5,27 @@
     <div class="col-sm-3"></div>
   
     <div class="col-md-6">
-     <div class="card">
-    <div class="card-header text-center text-info " >ADD&nbsp;ROOM</div>
+     <div class="card" style="width: 120%;">
+    <div class="card-header text-center text-primary" ><h3>ADD&nbsp;ROOM</h3></div>
 	<form action="{% url 'addroom' %}" method="POST">
 		{% csrf_token %}
      <div class="card-body text-center">
-     <label>ROOM&nbsp;No:</label>
+     <label class="formspace">ROOM&nbsp;NO&nbsp;:</label>
      <input type="text" placeholder="Enter roomno" name="rno" required>
      <br>
-      <label>ROOM&nbsp;CAPACITY:</label>
+    <label class="formspace">ROOM&nbsp;CAPACITY&nbsp;:</label>
     <input type="number" placeholder="Enter room capacity" name="rcd" required>
     <br>
   
-    <label>STATUS:</label>
+    <label class="formspace">STATUS&nbsp;:</label>
     <select name = "st" >
            <option>y</option>
            <option>n</option>
 
            
-       </select>
+    </select>
    
+   <br>
 </div>
 <div class="card-footer text-center">
 	 <button class="btn btn-success">ADD&nbsp;ROOM</button>

@@ -8,7 +8,7 @@
   
     <div class="col-md-8">
      <div class="card">
-    <div class="card-header text-center text-info " >CREATE AN EXAM</div>
+    <div class="card-header text-center text-info " ><h4>CREATE AN EXAM</h4></div>
 	   <form action="{% url 'head1' %}" method="POST">
       {% csrf_token %}<center>
     <input type="text" size="40" name="heading" value="{{ data1.heading }}">&nbsp;&nbsp;&nbsp; <button class="btn btn-success"> UPDATE</button></center>

@@ -6,15 +6,15 @@
   
     <div class="col-md-8">
      <div class="card">
-    <div class="card-header text-center text-success" >REQUEST ADMIN</div>
+    <div class="card-header text-center text-success" ><h5>REQUEST ADMIN</h5></div>
     <form action="{% url 'request' %}" method="POST">
     	{% csrf_token %}
     	 <div class="card-body text-center">
-        <label class="inden">Enter your id :</label>
+        <label style="padding-right:13px ;width: 20% ;font-size:20px">Enter your id :</label>
        <input type="number" name="id" placeholder="enter ID"><br>
-       <label class="inden">Enter Date you don't want to invigilate&nbsp; :</label>
+       <label style="padding-right:13px ;width: 20% ;font-size:20px">Enter Date you don't want to invigilate&nbsp; :</label>
        <input type="date" name="date" placeholder="enter date ">
-       <br>
+       <br><br>
       <button class="btn btn-success"> SUBMIT</button>
 
     	 </div>

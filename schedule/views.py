@@ -94,7 +94,7 @@ def timetable(request):
 	data=conduct.objects.select_related('ex','fna1','room').all()
 	return render(request,'schedule/timetable.html',{'data':data})
 
-from django.contrib.auth.decorators import login_required
+
 
 
 def adminpage(request):
@@ -156,17 +156,18 @@ def dele(request,exid):
 #faculty assignment
 def assignfac(request,exid):
 	if request.method=="POST":
-		i=exid
-		fna=request.POST['fna1']
-		f=request.POST['fna2']
-		ro=request.POST['room']
-		sem=request.POST['sem']
-		sub=request.POST['sub']
-		dept=request.POST['dept']
-		exobj=exam.objects.get(id=i)
-		r=room.objects.get(roomno=ro)
-		x=faculty.objects.get(fname=fna)
 		try:
+			i=exid
+			fna=request.POST['fna1']
+			f=request.POST['fna2']
+			ro=request.POST['room']
+			sem=request.POST['sem']
+			sub=request.POST['sub']
+			dept=request.POST['dept']
+			exobj=exam.objects.get(id=i)
+			r=room.objects.get(roomno=ro)
+			x=faculty.objects.get(fname=fna)
+		
 			#if fac1,fac2 are different assign
 			if x.fname!=f:
 				data=conduct.objects.create(fna1=x,ex=exobj,fna2=f,room=r,semester=sem,dept=dept,subject=sub)
@@ -187,12 +188,16 @@ def assignfac(request,exid):
 	
 	d1=exam.objects.get(id=exid)
 	s1=conduct.objects.filter(ex=d1).values('fna1')
-	s2=conduct.objects.filter(ex=d1).values('room')
+	s3=conduct.objects.filter(ex=d1).values('fna2')
+	
 	dy=faculty.objects.filter(faculty_status='y').exclude(fname__in=s1)
+	dz=dy.exclude(fname__in=s3)
+
+	s2=conduct.objects.filter(ex=d1).values('room')
 	data3=room.objects.filter(room_status='y').exclude(roomno__in=s2)
 
-	s3=conduct.objects.filter(ex=d1).values('fna2')
-	dz=dy.exclude(fname__in=s3)
+	
+	
 	return render(request,'schedule/assignfac.html',{'x':d1,'y':dz,'z':data3})
 #update faculty status
 def facstatus(request):
@@ -307,7 +312,7 @@ def timetable2(request):
 	hx=head.objects.first()
 	return render(request,'schedule/timetable2.html',{'data':data,'h':hx})
 def timetable3(request):
-	data=conduct.objects.select_related('ex','fna1','room').all()
+	data=exam.objects.all()
 	hx=head.objects.first()
 	return render(request,'schedule/timetable3.html',{'data':data,'h':hx})
 def timetable4(request):
@@ -364,6 +369,7 @@ def addtt(req):
 		data=tt1(req.POST,req.FILES)
 		if data.is_valid():
 			data.save()
+			messages.success(req,"ADDED SUCCESSFULLY..")	
 			return render(req,'schedule/addtt.html',{'form':form})
 	
 	return render(req,'schedule/addtt.html',{'form':form})

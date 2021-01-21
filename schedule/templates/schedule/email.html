@@ -2,13 +2,13 @@
 
 {% block content %}
 
-<br><br><br>
+<br><br>
 	<div  class="row">
     <div class="col-sm-3"></div>
   
     <div class="col-md-6">
-     <div class="card">
-    <div class="card-header text-center text-info " >SEND&nbsp;EMAIL</div>
+     <div class="card" style="width:110%">
+    <div class="card-header text-center text-success " ><h4>SEND&nbsp;EMAIL</h4></div>
 	<form action="{% url 'send_email' %}" method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
      <div class="card-body text-center">
@@ -19,20 +19,20 @@
      
      <br>
       <label>Subject:</label><br>
-     <textarea  class="styles" name="sub" rows="1" cols="40" placeholder="enter subject" required></textarea>
+     <textarea  class="styles" name="sub" rows="2" cols="50" placeholder="enter subject" required></textarea>
     <br>
     <label>Message:</label><br>
-    <textarea  class="styles" name="message" rows="5" cols="40"placeholder="body of email"></textarea>
+    <textarea  class="styles" name="message" rows="5" cols="50" placeholder="body of email"></textarea>
     
-    <br>
+    <br><br>
   
     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-    <label>File:</label>
+    <label>File:</label>&nbsp;
     <input type="file" name="file" required>
    
 </div>
 <div class="card-footer text-center">
-	 <button class="btn btn-success">SEND</button>
+	 <button class="btn btn-success">SEND</button>&nbsp;&nbsp;
       <a href="{% url 'timetable' %}" <button class="btn btn-warning" >CANCEL</button></a>
    
 	</div>

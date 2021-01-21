@@ -6,14 +6,14 @@
   
   <div class="col-md-6">
    <div class="card">
-      <div class="card-header text-center text-info" >Enter exam ID to assign faculty:<br>(Or go to CREATE EXAM to create new exam)</div>
+      <div class="card-header text-center text-info" ><h5>Enter exam ID to assign faculty:</h5>(Or go to CREATE EXAM to create new exam)</div>
 
 		 <form action="{% url 'adminpage' %}" method="POST">
 		 	{% csrf_token %}
 		 	<div class="card-body text-center">
 		 		<label>EXAM&nbsp;ID:&nbsp;</label>
           <input type="number" name="id">
-          &nbsp;<button class="btn btn-dark">Continue-></button>
+          &nbsp;<br><br><button class="btn btn-dark">Continue-></button>
       </form>
   </div>
 </div>

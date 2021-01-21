@@ -42,12 +42,14 @@ body{
 	text-decoration: none;
 }
 .menubar{
-  position: fixed; 
+  
 	background-color:#132743;
+
     height: 65px;
 	text-align: right;
 }
 .menubar ul{
+
 	display: inline-flex;
 	list-style: none;
 	color: #f9fcfb;
@@ -139,7 +141,10 @@ label #cancel{
 	height: 100vh;
 	transition: all .5s;
 }*/
-
+.formspace{
+	padding-right:13px;
+	width: 20%;    
+}
 .inden{
    color: @darkTextColor;
   width: 120px;
@@ -190,19 +195,4 @@ label #cancel{
   top: 0;
   position: absolute;
 }
-@media only screen and (max-width:800px) {
-  /* For tablets: */
-  .mytable{
-    width: 80%;
-    padding: 0;
-  }
-  .sidebar {
-    width: 100%;
-  }
-}
-@media only screen and (max-width:500px) {
-  /* For mobile phones: */
-  .sidebar, .mytable, .dropdown {
-    width: 100%;
-  }
-}
+
