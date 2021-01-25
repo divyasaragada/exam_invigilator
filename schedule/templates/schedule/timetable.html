@@ -28,9 +28,9 @@
       <td data-column="Invigilator&nbsp;1">{{ i.fna1.fname }}</td>
       <td data-column="Invigilator&nbsp;2">{{ i.fna2}}</td>
       <td data-column="ROOMNO">{{ i.room.roomno }}</td>
-      <td data-column="SUBJECT">{{ i.subject }}</td>
-      <td data-column="DEPARTMENT">{{ i.dept }}</td>
-      <td data-column="SEMESTER">{{ i.semester }}</td>
+      <td data-column="SUBJECT">{{ i.ex.subject }}</td>
+      <td data-column="DEPARTMENT">{{ i.ex.dept }}</td>
+      <td data-column="SEMESTER">{{ i.ex.semester }}</td>
       
       <td data-column="EDIT"><a href="{% url 'update' i.id %}"><i class="fa fa-edit" style="font-size: 25px;color:#0d7377" ></i></a></td>
       <td data-column="DELETE"><a href="{% url 'delete' i.id %}"><i class="fa fa-trash"  style="font-size:25px;color:#ff414d"></a></i></td>

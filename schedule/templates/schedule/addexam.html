@@ -4,14 +4,16 @@
   {% block content %}
     <br><br>
 	  <div  class="row">
-     <div class="col-sm-2"></div>
+     <div class="col-sm-1"></div>
   
-    <div class="col-md-8">
-     <div class="card">
+    <div class="col-md-9">
+     <div class="card" style="width:115%;margin-right: 20px">
     <div class="card-header text-center text-info " ><h4>CREATE AN EXAM</h4></div>
+    <!--<div class="card-body">-->
 	   <form action="{% url 'head1' %}" method="POST">
       {% csrf_token %}<center>
-    <input type="text" size="40" name="heading" value="{{ data1.heading }}">&nbsp;&nbsp;&nbsp; <button class="btn btn-success"> UPDATE</button></center>
+        
+   <input type="text" size="40" name="heading" value="{{ data1.heading }}">&nbsp;&nbsp;&nbsp; <button class="btn btn-success"> UPDATE</button></center>
      
       </form>
    
@@ -22,27 +24,50 @@
       <th>EXAM&nbsp;ID</th>
       <th>EXAM&nbsp;DATE</th>
       <th>EXAM&nbsp;TIME</th>
+      <th>SEMESTER  </th>
+      <th>SUBJECT </th>
+      <th>DEPARTMENT </th>
       <th>CHANGE </th>
     </tr>
 
     {% for i in data %}
     <tr>
      
-      <td>{{ i.id }}</td>
-      <td>{{ i.exam_date }}</td>
-      <td>{{ i.exam_time }}</td>
+      <td >{{ i.id }}</td>
+      <td >{{ i.exam_date }}</td>
+      <td >{{ i.exam_time }}</td>
+      <td>{{ i.semester }}</td>
+      <td>{{ i.subject }}</td>
+      <td>{{ i.dept }}</td>
       <td><a href="{% url 'dele' i.id %}"><button class="btn btn-danger">DELETE&nbsp;</button></a></td>
     </tr>
     {% endfor %}
   <tr>
      <form action="{% url 'addexam' %}" method="POST">
     {% csrf_token %}
-      <td><input type="number" name="id" placeholder="id"></td>
-      <td><input type="date" name="date" placeholder="Enter exam date"></td>
-      <td><input type="text" name="time" placeholder="Enter time"></td>
+      <td><input style="width:80px" type="number"  name="id" placeholder="id"></td>
+      <td><input style="width:150px" type="date" name="date" placeholder="Enter exam date"></td>
+      <td><input style="width:170px" type="text" name="time" placeholder="Enter time"></td>
+     
+       <td><input style="width:165px" type="text" name="sem" placeholder="enter semester ('1-2') "></td>
+      
+       
+       <td><input style="width:180px" type="text" name="sub" placeholder="enter subject "></td>
+       
+        
+         <td><select name = "dept" id ="dept">
+           <option>CSE</option>
+
+           <option>ECE</option>
+           <option>EEE</option>
+           <option>IT</option>
+         </select></td>
       
       <td><button class="btn btn-info">ADD&nbsp;EXAM</button></td>
     </tr>
 </table>
 </form>
+</div>
+</div>
+</div>
 {% endblock content %}

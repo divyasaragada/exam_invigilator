@@ -42,9 +42,11 @@ urlpatterns = [
     path('timetable2/',views.timetable2,name='timetable2'),
     path('timetable3/',views.timetable3,name='timetable3'),
     path('timetable4/',views.timetable4,name='timetable4'),
+    path('timetable5/<int:fid>/',views.timetable5,name='timetable5'),
 
     path('request/',views.request,name='request'),
     path('facstart/',views.facstart,name='facstart'),
+    path('facrequests/',views.facrequests,name='facrequests'),
     path('facconstraints',views.facconstraints,name='facconstraints'),
     path('delet/<int:id>/',views.delet,name="delet"),
 

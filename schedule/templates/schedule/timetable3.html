@@ -10,13 +10,19 @@
     <tr>
      <th>EXAM&nbsp;&nbsp;DATE</th>
      <th>EXAM&nbsp;TIME</th>
+     <th>SUBJECT</th>
+     <th>DEPARTMENT</th>
+     <th>SEMESTER</th>
     </tr>
   </thead>
   <tbody>
     {% for i in data %} 
     <tr>
       <td >{{ i.exam_date }}</td>
-      <td >{{ i.exam_time }}</td>   
+      <td >{{ i.exam_time }}</td> 
+      <td >{{ i.subject }}</td>
+      <td data-column="DEPARTMENT">{{ i.dept }}</td>
+      <td data-column="SEMESTER">{{ i.semester }}</td>  
     </tr>
     {% endfor %}
   </tbody>

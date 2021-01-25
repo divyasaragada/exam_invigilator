@@ -11,6 +11,9 @@
           {% csrf_token %}
       <div class="card-body text-center">
             <h3>ENTERED EXAM ID IS:&nbsp;{{ x.id }}</h3>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>SUBJECT&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ x.subject }}<br>
+            <label >DEPARTMENT&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ x.dept }}<br>
+            
                   
             <br>
              <label class="inden">ROOM : </label>
@@ -41,7 +44,7 @@
                         {% endfor %}
                       </select>
             <br>
-       <label class="inden">SEMESTER :  </label>
+       <!--<label class="inden">SEMESTER :  </label>
        <input type="text" name="sem" placeholder="enter semester ('1-2') ">
       <br>
        <label class="inden">SUBJECT :</label>
@@ -55,7 +58,7 @@
            <option>ECE</option>
            <option>EEE</option>
            <option>IT</option>
-         </select>
+         </select>-->
          
         
       

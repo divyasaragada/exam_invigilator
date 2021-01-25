@@ -41,16 +41,16 @@
                         {% endfor %}
                       </select>
             <br>
-       <label class="inden">SEMESTER :  </label>
-       <input type="text" name="sem" value="{{data.semester}}" placeholder="enter semester ('1-2') ">
+      <label class="inden">SEMESTER :  </label>
+       <input type="text" name="sem" value="{{x.semester}}" placeholder="enter semester ('1-2') ">
       <br>
        <label class="inden">SUBJECT :</label>
-       <input type="text" name="sub" value="{{data.subject}}" placeholder="enter subject ">
+       <input type="text" name="sub" value="{{x.subject}}" placeholder="enter subject ">
        <br>
          <label class="inden">DEPARTMENT :</label>
 
          <select name = "dept" id ="dept">
-           <option value="{{data.dept}}" selected>{{data.dept}}</option>
+           <option value="{{x.dept}}" selected>{{x.dept}}</option>
            <option>CSE</option>
            <option>ECE</option>
            <option>EEE</option>

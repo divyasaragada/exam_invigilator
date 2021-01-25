@@ -21,6 +21,8 @@
       <div class="menubar">
       	
 	<ul>
+		<li style="font-size: 24px;">EXAM-INVIGILATOR ASSIGNMENT SYSTEM</li>
+		<li >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 		<li><a href="{% url 'timetable2' %}">INVIGILATION DUTIES</a></li>
 		<li><a href="{% url 'home' %}">LOGOUT</a></li>
 	</ul>
@@ -29,9 +31,14 @@
 	<h2>WELCOME {{ data.fname }}</h2>
 	<br>
 	<center>
-	<a href="{% url 'timetable2' %}" <button class="btn btn-light btn-lg" >&nbsp;INVIGILATION DUTIES</button></a>
+	<a href="{% url 'timetable2' %}" ><button class="btn btn-light btn-lg" style="width:500px">&nbsp;INVIGILATION DUTIES</button></a>
+	<br><br>
+	<a href="{% url 'timetable5' data.faculty_id %}"> <button class="btn btn-light btn-lg" style="width:500px">&nbsp; YOUR INVIGILATION DUTIES</button></a><br><br>
 	&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="{% url 'request' %}" <button class="btn btn-dark btn-lg" >PUT&nbsp;A&nbsp;REQUEST</button></a>
+	<a href="{% url 'request' %}" ><button class="btn btn-dark btn-lg" style="width:500px" >PUT&nbsp;A&nbsp;REQUEST</button></a><br><br>
+	
+	<a href="{% url 'facrequests' %}"><button class="btn btn-dark btn-lg" style="width:500px">VIEW REQUESTS</button></a>
+
 	</center>
 	<section>
 

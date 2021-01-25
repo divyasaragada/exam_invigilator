@@ -53,7 +53,6 @@ def fac(request):
 		try:
 			data=faculty.objects.get(faculty_id=id1,email=email,dept=dept)
 			if data:
-				
 				return render(request,'schedule/facstart.html',{'data':data})
 		except Exception:
 			messages.warning(request,'Please enter valid details!!!.......')
@@ -94,9 +93,6 @@ def timetable(request):
 	data=conduct.objects.select_related('ex','fna1','room').all()
 	return render(request,'schedule/timetable.html',{'data':data})
 
-
-
-
 def adminpage(request):
 	d=exam.objects.all()
 	if request.method=='POST':
@@ -131,8 +127,12 @@ def addexam(request):
 		i=request.POST['id']
 		date=request.POST['date']
 		time=request.POST['time']
+		sem=request.POST['sem']
+		sub=request.POST['sub']
+		dept=request.POST['dept']
+
 		try:
-			data=exam.objects.create(id=i,exam_date=date,exam_time=time)
+			data=exam.objects.create(id=i,exam_date=date,exam_time=time,semester=sem,dept=dept,subject=sub)
 			data=exam.objects.all()
 			hx=head.objects.first()
 
@@ -161,16 +161,14 @@ def assignfac(request,exid):
 			fna=request.POST['fna1']
 			f=request.POST['fna2']
 			ro=request.POST['room']
-			sem=request.POST['sem']
-			sub=request.POST['sub']
-			dept=request.POST['dept']
+			
 			exobj=exam.objects.get(id=i)
 			r=room.objects.get(roomno=ro)
 			x=faculty.objects.get(fname=fna)
 		
 			#if fac1,fac2 are different assign
 			if x.fname!=f:
-				data=conduct.objects.create(fna1=x,ex=exobj,fna2=f,room=r,semester=sem,dept=dept,subject=sub)
+				data=conduct.objects.create(fna1=x,ex=exobj,fna2=f,room=r)
 			if data:
 				#redirecting with fresh data(excluding the above assigned faculty to that exam id) to same page.
 				d1=exam.objects.get(id=exid)
@@ -274,11 +272,9 @@ def update(request,cid):
 		sem=request.POST['sem']
 		sub=request.POST['sub']
 		dept=request.POST['dept']
-
+		
+		edit=exam.objects.update(id=data.ex.id,semester=sem,dept=dept,subject=sub)
 		data=conduct.objects.select_related('ex','fna1','room').get(id=i)
-		data.subject=sub
-		data.dept=dept
-		data.semester=sem
 		r=room.objects.get(roomno=ro)
 		x=faculty.objects.get(fname=fe)
 		data.fna2=f
@@ -319,8 +315,18 @@ def timetable4(request):
 	data=conduct.objects.select_related('ex','fna1','room').all()
 	hx=head.objects.first()
 	return render(request,'schedule/timetable4.html',{'data':data,'h':hx})
+def timetable5(request,fid):
+	n=faculty.objects.get(faculty_id=fid)
+	data1=conduct.objects.select_related('ex','fna1','room').filter(fna1=n)
+	data2=conduct.objects.select_related('ex','fna1','room').filter(fna2=n.fname)
+
+	hx=head.objects.first()
+	return render(request,'schedule/timetable5.html',{'data1':data1,'data2':data2,'h':hx})
 
 #faculty request for admin 
+from datetime import date
+
+today = date.today()
 def request(request):
 
 	if request.method=="POST":
@@ -337,20 +343,24 @@ def request(request):
 			for i in f1:
 				if data.fname==i.fname:
 					k=1
+					d1=conduct.objects.get(fna1=data.fname,ex__exam_date=d)
+
 			for i in f2:
 				if data.fname==i.fname:
 					k=2
-			if k==1 or k==2:
+					d2=conduct.objects.get(fna2=data.fname,ex__exam_date=d)
+
+			if (k==1 and d1.ex.exam_date<today) or (k==2 and d2.ex.exam_date<today):
 				constraints.objects.create(cname=data.fname,cdate=d)
 				messages.success(request,"REQUEST SENT SUCCESSFULLY..")	
 				return render(request,'schedule/request.html')
 			else:
-				messages.warning(request,"No invigilation on this date")
+				messages.warning(request,"CANNOT PROCEED THE REQUEST!!...PLEASE CHECK THE DATE")
 				data=conduct.objects.select_related('ex','fna1','room').all()
 				return render(request,'schedule/timetable2.html',{'data':data})
 		except Exception:
 			messages.warning(request,"please enter your details correctly")
-			return render(request,'schedule/facstart.html')
+			return render(request,'schedule/request.html')
 	return render(request,'schedule/request.html')
 #faculty constraints
 def facconstraints(request):
@@ -428,3 +438,6 @@ def head1(request):
 		return render(request,'schedule/addexam.html',{'data':data,'data1':data1})
 	return render(request,'schedule/addexam.html',{'data':data,'data1':data1})
 	
+def facrequests(request):
+	data=constraints.objects.all()
+	return render(request,'schedule/facrequests.html',{'data':data})
