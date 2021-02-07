@@ -29,7 +29,7 @@ body{
 	line-height: 2;
 	font-family: 'Merriweather', serif;
 	font-weight: bold;
-	margin: 170px auto 40px auto;
+	margin: 100px auto 40px auto;
    
    animation: mine 3s steps(40);
    overflow: hidden;
@@ -51,10 +51,10 @@ body{
 }
 .container-fluid{
 	background-color: #00416d;
-	height: 1.4%;
+	height: 1.2%;
 	padding:0 0;
 }
-img{
+.img{
 	width:4%;
 	height: 4%;
 
